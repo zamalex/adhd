@@ -1,0 +1,119 @@
+PODS:
+  - audio_session (0.0.1):
+    - Flutter
+  - audioplayers_darwin (0.0.1):
+    - Flutter
+  - better_player (0.0.1):
+    - Flutter
+    - KTVHTTPCache (~> 2.0.0)
+  - CocoaAsyncSocket (7.6.5)
+  - Flutter (1.0.0)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - just_audio (0.0.1):
+    - Flutter
+  - KTVCocoaHTTPServer (1.0.0):
+    - CocoaAsyncSocket
+  - KTVHTTPCache (2.0.1):
+    - KTVCocoaHTTPServer
+  - package_info_plus (0.4.5):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - record_darwin (1.0.0):
+    - Flutter
+    - FlutterMacOS
+  - rive_common (0.0.1):
+    - Flutter
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - sqflite (0.0.3):
+    - Flutter
+    - FMDB (>= 2.7.5)
+  - video_player_avfoundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - wakelock (0.0.1):
+    - Flutter
+  - wakelock_plus (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - audio_session (from `.symlinks/plugins/audio_session/ios`)
+  - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
+  - better_player (from `.symlinks/plugins/better_player/ios`)
+  - Flutter (from `Flutter`)
+  - just_audio (from `.symlinks/plugins/just_audio/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - record_darwin (from `.symlinks/plugins/record_darwin/ios`)
+  - rive_common (from `.symlinks/plugins/rive_common/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
+  - wakelock (from `.symlinks/plugins/wakelock/ios`)
+  - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
+
+SPEC REPOS:
+  trunk:
+    - CocoaAsyncSocket
+    - FMDB
+    - KTVCocoaHTTPServer
+    - KTVHTTPCache
+
+EXTERNAL SOURCES:
+  audio_session:
+    :path: ".symlinks/plugins/audio_session/ios"
+  audioplayers_darwin:
+    :path: ".symlinks/plugins/audioplayers_darwin/ios"
+  better_player:
+    :path: ".symlinks/plugins/better_player/ios"
+  Flutter:
+    :path: Flutter
+  just_audio:
+    :path: ".symlinks/plugins/just_audio/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  record_darwin:
+    :path: ".symlinks/plugins/record_darwin/ios"
+  rive_common:
+    :path: ".symlinks/plugins/rive_common/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
+  video_player_avfoundation:
+    :path: ".symlinks/plugins/video_player_avfoundation/darwin"
+  wakelock:
+    :path: ".symlinks/plugins/wakelock/ios"
+  wakelock_plus:
+    :path: ".symlinks/plugins/wakelock_plus/ios"
+
+SPEC CHECKSUMS:
+  audio_session: 4f3e461722055d21515cf3261b64c973c062f345
+  audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
+  better_player: a4383402f457e53720525888c0fc5d337ef6ba11
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
+  KTVCocoaHTTPServer: df8d7b861e603ff8037e9b2138aca2563a6b768d
+  KTVHTTPCache: 588c3eb16f6bd1e6fde1e230dabfb7bd4e490a4d
+  package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
+  path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
+  record_darwin: 1f6619f2abac4d1ca91d3eeab038c980d76f1517
+  rive_common: 3a4c254c6e4db7e4b9e05daeb3d1f47ae4f7bf76
+  shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
+  sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
+  video_player_avfoundation: 02011213dab73ae3687df27ce441fbbcc82b5579
+  wakelock: b0843b2479edbf6504d8d262c2959446f35373aa
+  wakelock_plus: 8b09852c8876491e4b6d179e17dfe2a0b5f60d47
+
+PODFILE CHECKSUM: afea214dc256c50378f06b9c05182772ccfac828
+
+COCOAPODS: 1.13.0
