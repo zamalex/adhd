@@ -10,11 +10,21 @@ class InitialRoutinEvent extends RoutineEvent {
   @override
   List<Object> get props => [""];
 }
+
+
+
 class GoRoutinDetailsEvent extends RoutineEvent {
   final RoutinModel routinModel;
   const GoRoutinDetailsEvent(this.routinModel);
   @override
   List<Object> get props => [routinModel];
+}
+
+class SubmitRoutineAnswersEvent extends RoutineEvent {
+  final List<RoutinQuestionModel>answers;
+  const SubmitRoutineAnswersEvent(this.answers);
+  @override
+  List<Object> get props => [answers];
 }
 class AnswerRoutineeQueestion extends RoutineEvent {
   final RoutinQuestionModel questionModel;

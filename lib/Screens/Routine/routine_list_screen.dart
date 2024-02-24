@@ -50,13 +50,16 @@ class _routineList extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return ListView.separated(
-      itemBuilder: (context, index) => RoutineWidget(
-        routine: routines[index],
-        onTap: () {
-          context
-              .read<RoutineBloc>()
-              .add(GoRoutinDetailsEvent(routines[index]));
-        },
+      itemBuilder: (context, index) => Opacity(
+        opacity: routines[index].isAvailable?1:.3,
+        child: RoutineWidget(
+          routine: routines[index],
+          onTap: () {
+            context
+                .read<RoutineBloc>()
+                .add(GoRoutinDetailsEvent(routines[index]));
+          },
+        ),
       ),
       // scrollDirection: Axis.horizontal,
       itemCount: routines.length,

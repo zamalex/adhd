@@ -39,5 +39,27 @@ class RoutineBloc extends Bloc<RoutineEvent, RoutineState> {
         emit(SelectedQuestionRoutineState(event.questionModel.done ?? false, event.index));
     
     });
+
+      on<SubmitRoutineAnswersEvent>((event, emit) async {
+      // TODO: implement event handler
+
+        emit(RoutineLoadingState());
+        Map<String,dynamic> body={};
+        List<Map>answersList=[];
+        event.answers.forEach((element) {
+
+          answersList.add({'done':element.done,'doneAr':element.done,'routinePointID':element.id});
+
+        });
+
+        body.putIfAbsent('notificationID', () => 'answersList');
+        body.putIfAbsent('patientID', () => 'answersList');
+        body.putIfAbsent('parentID', () => 'answersList');
+        body.putIfAbsent('routinePoints', () => answersList);
+        var response = await RoutinController.submitAnswers(body);
+
+        emit(RoutineDoneState('Done'));
+
+    });
   }
 }

@@ -3,14 +3,14 @@ import 'dart:ui' as ui;
 
 
 class URL {
- // static const DOMAIN = "http://flowserver-001-site1.ctempurl.com/api/";
-  static const DOMAIN = "https://arabtesting.org:50144/api/";
+  static const DOMAIN = "http://flowserver-001-site1.ctempurl.com/api/";
+ // static const DOMAIN = "https://arabtesting.org:50144/api/";
   static const PARTITION = "MobileApp/";
   static const DOMAIN_WITH_PARTITION = DOMAIN + PARTITION;
 
   //Auth Apis
   static String LOGIN_URL = DOMAIN + "Account/Login";
-  static String AUDIO_URL = DOMAIN_WITH_PARTITION + "Media/Videos/Educational";
+  static String AUDIO_URL = DOMAIN_WITH_PARTITION + "Media/Audios/Mindfulness";
   static String VIDEO_URL = DOMAIN_WITH_PARTITION + "Media/Videos/Educational";
   static String FILES_URL = DOMAIN_WITH_PARTITION + "Media/Files/Educational";
   static String NOTIFICATIONS_URL = DOMAIN_WITH_PARTITION + "Media/Files/Educational";

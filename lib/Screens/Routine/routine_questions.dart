@@ -19,6 +19,9 @@ class RoutineQuestiionsScreen extends StatelessWidget {
         if (state is SelectedQuestionRoutineState) {
           routin.questions?[state.index].done = state.isDone;
         }
+        else if(state is RoutineDoneState){
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+        }
       },
       builder: (context, state) {
         if (state is ShowRoutinDetailsState) {
@@ -32,9 +35,17 @@ class RoutineQuestiionsScreen extends StatelessWidget {
               title: "",
             ),
           ),
-          body: Padding(
+          body: state is RoutineLoadingState?Center(child: CircularProgressIndicator(),):Padding(
             padding: EdgeInsets.all(16),
-            child: _routineQuestionsList(routin.questions ?? []),
+            child: Column(
+              children: [
+                Expanded(child: _routineQuestionsList(routin.questions ?? [])),
+                TextButton(onPressed: (){
+                  context.read<RoutineBloc>()
+                      .add(SubmitRoutineAnswersEvent(routin.questions!));
+                }, child:Text('submit'))
+              ],
+            ),
           ),
         );
       },

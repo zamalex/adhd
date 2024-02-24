@@ -29,6 +29,7 @@ class RoutinModel extends Equatable {
   int? id;
   int? duration;
   String? image;
+  bool isAvailable = true;
   List<RoutinQuestionModel>? questions;
 
   RoutinModel(

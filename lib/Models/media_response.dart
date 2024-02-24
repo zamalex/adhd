@@ -43,7 +43,7 @@ class Video {
     titleEn = json['titleEn'];
     image = json['image'];
     imageOriginalName = json['imageOriginalName'];
-    video = json['video']??json['file'];
+    video = json['video']??json['file']??json['audioUrl'];
   }
 
 

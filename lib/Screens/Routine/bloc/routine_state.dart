@@ -42,3 +42,21 @@ class SelectedQuestionRoutineState extends RoutineState {
   @override
   List<Object> get props => [isDone, index];
 }
+
+class RoutineDoneState extends RoutineState {
+  final String message;
+
+  const RoutineDoneState(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+
+class RoutineLoadingState extends RoutineState {
+
+  const RoutineLoadingState();
+
+  @override
+  List<Object> get props => [''];
+}

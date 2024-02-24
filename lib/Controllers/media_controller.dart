@@ -34,7 +34,7 @@ class MediaController {
   static Future<List<Video>> getAudioList() async {
 
     try{
-      var response = await ApiConnection.get(URL.VIDEO_URL,{});
+      var response = await ApiConnection.get(URL.AUDIO_URL,{});
 
       var videos = MediaResponse.fromJson(response).videos ?? [];
       var success = MediaResponse.fromJson(response).statusCode ?? 0;
