@@ -21,7 +21,7 @@ class GoRoutinDetailsEvent extends RoutineEvent {
 }
 
 class SubmitRoutineAnswersEvent extends RoutineEvent {
-  final List<RoutinQuestionModel>answers;
+  final RoutinModel answers;
   const SubmitRoutineAnswersEvent(this.answers);
   @override
   List<Object> get props => [answers];

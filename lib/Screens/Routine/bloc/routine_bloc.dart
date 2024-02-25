@@ -46,13 +46,13 @@ class RoutineBloc extends Bloc<RoutineEvent, RoutineState> {
         emit(RoutineLoadingState());
         Map<String,dynamic> body={};
         List<Map>answersList=[];
-        event.answers.forEach((element) {
+        event.answers.questions!.forEach((element) {
 
           answersList.add({'done':element.done,'doneAr':element.done,'routinePointID':element.id});
 
         });
 
-        body.putIfAbsent('notificationID', () => 'answersList');
+        body.putIfAbsent('notificationID', () => event.answers.id);
         body.putIfAbsent('patientID', () => 'answersList');
         body.putIfAbsent('parentID', () => 'answersList');
         body.putIfAbsent('routinePoints', () => answersList);

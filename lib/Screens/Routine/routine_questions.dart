@@ -42,7 +42,7 @@ class RoutineQuestiionsScreen extends StatelessWidget {
                 Expanded(child: _routineQuestionsList(routin.questions ?? [])),
                 TextButton(onPressed: (){
                   context.read<RoutineBloc>()
-                      .add(SubmitRoutineAnswersEvent(routin.questions!));
+                      .add(SubmitRoutineAnswersEvent(routin));
                 }, child:Text('submit'))
               ],
             ),
