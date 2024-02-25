@@ -6,6 +6,12 @@ import 'Utilites/urls.dart';
 
 class RoutinController {
   static Future<List<RoutinModel>> get() async {
+
+    if(URL.userID.isEmpty){
+      var profile = await ApiConnection.get(URL.PROFILE_URL, null);
+      URL.userID=profile['data']['id'];
+    }
+
     var response = await ApiConnection.get(URL.GET_ROUTIN_URL, null);
 
     var success = RoutinResponse.fromJson(response).code ?? 0;

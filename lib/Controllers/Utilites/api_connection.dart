@@ -14,7 +14,7 @@ class ApiConnection {
       print(URL.HEADER());
 
       final response =
-          await http.post(Uri.parse(url), headers: URL.HEADER(), body: body);
+          await http.post(Uri.parse(url), headers: URL.HEADER()..putIfAbsent('userId',()=>URL.userID,), body: body);
 
       print(response.body);
       print("///////////////");
@@ -41,7 +41,7 @@ class ApiConnection {
       print(urlWithBody);
       print(URL.HEADER());
 
-      final response = await http.get(urlWithBody, headers: URL.HEADER());
+      final response = await http.get(urlWithBody, headers: URL.HEADER()..putIfAbsent('userId',()=>URL.userID,));
 
       print(response.body);
       print("///////////////");
@@ -66,7 +66,7 @@ class ApiConnection {
       print(urlWithBody);
       print(URL.HEADER());
 
-      final response = await http.delete(urlWithBody, headers: URL.HEADER());
+      final response = await http.delete(urlWithBody, headers: URL.HEADER()..putIfAbsent('userId',()=>URL.userID,));
 
       print(response.body);
       print("///////////////");
