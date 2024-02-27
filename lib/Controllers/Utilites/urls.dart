@@ -3,8 +3,8 @@ import 'dart:ui' as ui;
 
 
 class URL {
-  //static const DOMAIN = "http://flowserver-001-site1.ctempurl.com/api/";
-  static const DOMAIN = "https://arabtesting.org:50144/api/";
+  static const DOMAIN = "http://flowserver-001-site1.ctempurl.com/api/";
+  //static const DOMAIN = "https://arabtesting.org:50144/api/";
   static const PARTITION = "MobileApp/";
   static const DOMAIN_WITH_PARTITION = DOMAIN + PARTITION;
 
@@ -26,9 +26,12 @@ class URL {
   //     DOMAIN_WITH_API + "Account/ChangePassword";
 
 //Routin Apis
-  static String GET_ROUTIN_URL = DOMAIN_WITH_PARTITION + "Routines";
+  static String GET_ROUTIN_URL = DOMAIN_WITH_PARTITION + "PatientRoutines";
+  static String POST_ROUTIN_URL = DOMAIN_WITH_PARTITION + "RouitnePointAnswer";
+  static String POST_CHILD_ROUTIN_URL = DOMAIN_WITH_PARTITION + "PatientRouitneAnswer";
 
   static String userID='';
+  static String userType = '';
 
 
 

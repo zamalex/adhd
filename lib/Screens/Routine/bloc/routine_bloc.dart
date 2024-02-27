@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:adhd/Controllers/Utilites/urls.dart';
 import 'package:adhd/Controllers/routin_controller.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -46,6 +47,20 @@ class RoutineBloc extends Bloc<RoutineEvent, RoutineState> {
         emit(RoutineLoadingState());
         Map<String,dynamic> body={};
         List<Map>answersList=[];
+        bool answered = true;
+        event.answers.questions!.forEach((element) {
+          if(element.done==null){
+
+            answered = false;
+
+          }
+        });
+
+        if(!answered){
+          emit(RoutineDoneState('You should answer all questions'));
+          return;
+        }
+
         event.answers.questions!.forEach((element) {
 
           answersList.add({'done':element.done,'doneAr':element.done,'routinePointID':element.id});
@@ -53,12 +68,13 @@ class RoutineBloc extends Bloc<RoutineEvent, RoutineState> {
         });
 
         body.putIfAbsent('notificationID', () => event.answers.id);
-        body.putIfAbsent('patientID', () => 'answersList');
-        body.putIfAbsent('parentID', () => 'answersList');
+        body.putIfAbsent('routineID', () => event.answers.id);
+        body.putIfAbsent('patientID', () => URL.userID);
+        body.putIfAbsent('parentID', () => null);
         body.putIfAbsent('routinePoints', () => answersList);
-        var response = await RoutinController.submitAnswers(body);
+        var response = URL.userType=='Child'?await RoutinController.submitChildAnswers(body):await RoutinController.submitAnswers(body);
 
-        emit(RoutineDoneState('Done'));
+        emit(RoutineDoneState(response['message']));
 
     });
   }
