@@ -3,8 +3,8 @@ import 'dart:ui' as ui;
 
 
 class URL {
-  static const DOMAIN = "http://flowserver-001-site1.ctempurl.com/api/";
-  //static const DOMAIN = "https://arabtesting.org:50144/api/";
+  //static const DOMAIN = "http://flowserver-001-site1.ctempurl.com/api/";
+  static const DOMAIN = "https://arabtesting.org:50144/api/";
   static const PARTITION = "MobileApp/";
   static const DOMAIN_WITH_PARTITION = DOMAIN + PARTITION;
 
@@ -13,7 +13,7 @@ class URL {
   static String AUDIO_URL = DOMAIN_WITH_PARTITION + "Media/Audios/Mindfulness";
   static String VIDEO_URL = DOMAIN_WITH_PARTITION + "Media/Videos/Educational";
   static String FILES_URL = DOMAIN_WITH_PARTITION + "Media/Files/Educational";
-  static String NOTIFICATIONS_URL = DOMAIN_WITH_PARTITION + "Media/Files/Educational";
+  static String NOTIFICATIONS_URL = DOMAIN_WITH_PARTITION + "NotificationPatient";
   static String FORGET_PASSWORD_EMAIL_URL = DOMAIN + "Account/ForgetPassword";
   static String PASSWORD_RESET_EMAIL_URL = DOMAIN + "Account/ResetPassword";
   static String DELETE_ACCOUNT_URL = DOMAIN + "Account/DeactivateUser/";

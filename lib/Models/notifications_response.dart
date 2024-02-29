@@ -26,24 +26,26 @@ class NotificationItem {
   String? titleAr;
   String? titleEn;
   String? image;
-  String? imageOriginalName;
-  String? notification;
+  //String? imageOriginalName;
+  //String? notification;
 
   NotificationItem(
       {this.id,
         this.titleAr,
         this.titleEn,
         this.image,
-        this.imageOriginalName,
-        this.notification});
+       // this.imageOriginalName,
+        //this.notification
+  //
+  });
 
   NotificationItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     titleAr = json['titleAr'];
     titleEn = json['titleEn'];
     image = json['image'];
-    imageOriginalName = json['imageOriginalName'];
-    notification = json['video']??json['file'];
+  //  imageOriginalName = json['imageOriginalName'];
+   // notification = json['video']??json['file'];
   }
 
 

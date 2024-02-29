@@ -1,8 +1,12 @@
+import 'package:adhd/Models/notifications_response.dart';
 import 'package:adhd/Utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:voice_message_package/voice_message_package.dart';
 
 class NotificationWidget extends StatelessWidget {
+  NotificationItem? notificationItem;
+  NotificationWidget({this.notificationItem});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -10,7 +14,7 @@ class NotificationWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          "you did agreat job",
+          notificationItem!=null?notificationItem!.titleEn??'':"",
           style: TextStyle(fontSize: 17),
         ),
         SizedBox(

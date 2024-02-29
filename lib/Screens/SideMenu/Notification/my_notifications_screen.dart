@@ -42,7 +42,7 @@ class _NotificationList extends StatelessWidget {
       builder: (context,state) {
 
         return state is NotificationLoading?Center(child: CircularProgressIndicator(),):state is NotificationLoaded?ListView.separated(
-          itemBuilder: (context, index) => NotificationWidget(),
+          itemBuilder: (context, index) => NotificationWidget(notificationItem: state.files[index],),
           scrollDirection: Axis.vertical,
           itemCount: state.files.length,
           separatorBuilder: (BuildContext context, int index) =>  Container(
