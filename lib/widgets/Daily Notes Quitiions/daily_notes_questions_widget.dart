@@ -2,11 +2,21 @@ import 'package:adhd/Models/daily_notes_questions_response.dart';
 import 'package:adhd/Utilities/constants.dart';
 import 'package:adhd/widgets/Utilities/button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DailyNotesQuestionWidget extends StatelessWidget {
+import '../../Screens/SideMenu/Daliy notes/bloc/daily_notes_bloc.dart';
 
-  DailyNotesQuestionWidget({required this.question});
+class DailyNotesQuestionWidget extends StatefulWidget {
+
+  DailyNotesQuestionWidget({required this.index,required this.question});
   DailyNotesQuestion question;
+  int index;
+
+  @override
+  State<DailyNotesQuestionWidget> createState() => _DailyNotesQuestionWidgetState();
+}
+
+class _DailyNotesQuestionWidgetState extends State<DailyNotesQuestionWidget> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,7 +24,7 @@ class DailyNotesQuestionWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         Text(question.questionEn??'', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+         Text(widget.question.questionEn??'', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
         const SizedBox(
           height: 5,
         ),
@@ -22,22 +32,40 @@ class DailyNotesQuestionWidget extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.start,
           children: [
             _choiceButtonWidget(
+              onSelect: (){
+                context.read<DailyNotesCubit>().selectAnswer(widget.question..selectedIndex=0, widget.index);
+                setState(() {
+                  widget.question.selectedIndex=0;
+                });
+                },
               title: "Often",
-              isSelected: false,
+              isSelected: widget.question.selectedIndex==0,
             ),
             const SizedBox(
               height: 10,
             ),
             _choiceButtonWidget(
+              onSelect: (){
+                context.read<DailyNotesCubit>().selectAnswer(widget.question..selectedIndex=1, widget.index);
+                setState(() {
+                  widget.question.selectedIndex=1;
+                });
+                },
               title: "Sometimes",
-              isSelected: true,
+              isSelected: widget.question.selectedIndex==1,
             ),
              const SizedBox(
               height: 10,
             ),
             _choiceButtonWidget(
+              onSelect: (){
+                context.read<DailyNotesCubit>().selectAnswer(widget.question..selectedIndex=2, widget.index);
+                setState(() {
+                  widget.question.selectedIndex=2;
+                });
+                },
               title: "Rarely",
-              isSelected: false,
+              isSelected: widget.question.selectedIndex==2,
             ),
           ],
         )
@@ -49,7 +77,8 @@ class DailyNotesQuestionWidget extends StatelessWidget {
 class _choiceButtonWidget extends StatelessWidget {
   var isSelected = false;
   var title;
-  _choiceButtonWidget({required this.title, required this.isSelected});
+  Function onSelect;
+  _choiceButtonWidget({required this.title, required this.isSelected,required this.onSelect});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,7 +90,9 @@ class _choiceButtonWidget extends StatelessWidget {
             color:  isSelected ? Constants.MAIN_COLOR : Constants.WHITE_BACKGROUND,
       ),
       child: InkWell(
-          onTap: () {},
+          onTap: () {
+            onSelect();
+          },
           child: Center(
               child: Text(
             title,

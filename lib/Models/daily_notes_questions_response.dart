@@ -38,6 +38,8 @@ class DailyNotesQuestion {
   String? trainerType;
   String? reportQuestionType;
 
+  int selectedIndex = 0;
+
   DailyNotesQuestion(
       {this.id,
         this.questionAr,

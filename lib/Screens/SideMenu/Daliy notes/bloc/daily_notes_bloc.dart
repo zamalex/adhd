@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:adhd/Controllers/media_controller.dart';
 import 'package:adhd/Controllers/routin_controller.dart';
 import 'package:adhd/Models/daily_notes_questions_response.dart';
@@ -41,5 +43,16 @@ class DailyNotesCubit extends Cubit<DailyNotesState> {
     } catch (e) {
       emit(FaildState('Failed to fetch videos. Error: $e'));
     }
+  }
+
+
+  void selectAnswer(DailyNotesQuestion question,int qIndex) async {
+
+      questions[qIndex].selectedIndex=question.selectedIndex;
+
+
+      print(questions[qIndex].selectedIndex.toString());
+      emit(ListDailyNotesQuestionsState(questions,subUsers));
+
   }
 }

@@ -48,15 +48,7 @@ class _DailyNotesQuestionsScreenState extends State<DailyNotesQuestionsScreen> {
     );
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
 
-    Future.delayed(Duration.zero).then((value) {
-      context.read<DailyNotesCubit>().getSubUsersList();
-    });
-  }
 }
 
 class _dailyNotesQuestionsList extends StatelessWidget {
@@ -68,6 +60,7 @@ class _dailyNotesQuestionsList extends StatelessWidget {
     // TODO: implement build
     return ListView.separated(
       itemBuilder: (context, index) => DailyNotesQuestionWidget(
+        index: index,
         question: questions[index],
       ),
       // scrollDirection: Axis.horizontal,
