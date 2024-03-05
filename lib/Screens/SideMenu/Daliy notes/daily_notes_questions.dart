@@ -2,6 +2,7 @@ import 'package:adhd/Models/daily_notes_questions_response.dart';
 import 'package:adhd/Models/sub_user.dart';
 import 'package:adhd/Screens/SideMenu/Daliy%20notes/bloc/daily_notes_states.dart';
 import 'package:adhd/Utilities/constants.dart';
+import 'package:adhd/Utilities/static_functions.dart';
 import 'package:adhd/widgets/Utilities/custom_appbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,21 +43,25 @@ class _DailyNotesQuestionsScreenState extends State<DailyNotesQuestionsScreen> {
           title: "Daily Notes Questions",
         ),
       ),
-      body: BlocBuilder<DailyNotesCubit,DailyNotesState>(
+      body: BlocConsumer<DailyNotesCubit,DailyNotesState>(
         builder:(c,state){
-          return state is DailyNotesLoadingState?Center(child: CircularProgressIndicator(),):state is ListDailyNotesQuestionsState? Padding(
+          return state is DailyNotesLoadingState?Center(child: CircularProgressIndicator(),):Padding(
             padding: EdgeInsets.all(16),
             child: Column(
               children: [
-                Expanded(child: _dailyNotesQuestionsList(questions: state.questions,)),
+                Expanded(child: _dailyNotesQuestionsList(questions: context.read<DailyNotesCubit>().questions,)),
                 TextButton(onPressed: (){
                   context.read<DailyNotesCubit>().submitAnswers(subUser.id!);
                 }, child:Text('Submit'))
               ]
               ,
             ),
-          ):Container();
-      }
+          );
+      }, listener: (BuildContext context, DailyNotesState state) {
+        if(state is DailyNotesDoneState||state is FaildState){
+          StaticFunctions.showErrorNote(context,state.props[0].toString());
+        }
+      },
       ),
     );
   }

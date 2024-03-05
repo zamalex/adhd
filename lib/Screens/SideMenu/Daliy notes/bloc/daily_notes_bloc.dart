@@ -57,8 +57,9 @@ class DailyNotesCubit extends Cubit<DailyNotesState> {
 
   }
 
-  void submitAnswers(String patientID){
-    Map request ={
+  void submitAnswers(String patientID)async{
+    emit(DailyNotesLoadingState());
+    Map<String,dynamic> request ={
       'patientID':patientID
     };
 
@@ -75,6 +76,27 @@ class DailyNotesCubit extends Cubit<DailyNotesState> {
     });
     request.putIfAbsent('reportQIDAndA', () =>answers);
     print('request : ${jsonEncode(request)}');
+
+    try {
+      Map result  = await RoutinController.submiSubUserAnswers(request);
+
+      bool success = result['success'];
+
+      print(result['message']);
+
+      if(success){
+        emit(DailyNotesDoneState(result['message']));
+
+      }
+      else{
+        emit(FaildState(result['message']));
+
+      }
+
+
+    } catch (e) {
+      emit(FaildState('Failed to fetch videos. Error: $e'));
+    }
 
   }
 }

@@ -83,6 +83,29 @@ class RoutinController {
   }
 
 
+
+  static Future<Map<String,dynamic>> submiSubUserAnswers(Map<String,dynamic> body) async {
+
+
+   try{
+     var response = await ApiConnection.post(URL.SUBMIT_SUB_USER_ANSWER_URL, jsonEncode(body));
+
+     var success = RoutinResponse.fromJson(response).code ?? 0;
+     var message = RoutinResponse.fromJson(response).message ?? "";
+
+     if (success == 200 || success == 201) {
+       return {'success':true,'message':message};
+     } else {
+       print(message);
+
+       return {'success':false,'message':message};
+     }
+   }catch(e){
+     return {'success':false,'message':e.toString()};
+   }
+  }
+
+
   static Future<Map<String,dynamic>> getSubUsersList() async {
 
 
