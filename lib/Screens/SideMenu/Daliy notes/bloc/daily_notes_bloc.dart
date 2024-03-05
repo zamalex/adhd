@@ -41,7 +41,7 @@ class DailyNotesCubit extends Cubit<DailyNotesState> {
 
       emit(ListDailyNotesQuestionsState(questions,subUsers));
     } catch (e) {
-      emit(FaildState('Failed to fetch videos. Error: $e'));
+      emit(FaildState('Error: $e'));
     }
   }
 
@@ -52,7 +52,7 @@ class DailyNotesCubit extends Cubit<DailyNotesState> {
 
 
 
-      print(questions[qIndex].selectedIndex.toString());
+      //print(questions[qIndex].selectedIndex.toString());
       emit(ListDailyNotesQuestionsState(questions,subUsers));
 
   }

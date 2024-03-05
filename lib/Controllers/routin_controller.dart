@@ -133,7 +133,10 @@ class RoutinController {
 
 
     try{
-      var response = await ApiConnection.get(URL.GET_DAILY_NOTES_QUESTIONS_URL,null);
+      var response = await ApiConnection.get(URL.GET_DAILY_NOTES_QUESTIONS_URL,{
+        "role": "Trainer"
+        //,"ageGroup": "Teen"
+      });
 
       var success = DailyNotesQuestionsResponse.fromJson(response).statusCode ?? 0;
       var message = DailyNotesQuestionsResponse.fromJson(response).message ?? "";
