@@ -12,6 +12,8 @@ import 'package:adhd/Screens/SideMenu/Audio_Screens/audio_list_screen.dart';
 import 'package:adhd/Screens/SideMenu/Audio_Screens/bloc/audio_list_bloc.dart';
 import 'package:adhd/Screens/SideMenu/Audio_Screens/bloc/audio_list_status.dart';
 import 'package:adhd/Screens/SideMenu/Chat/chat_screen.dart';
+import 'package:adhd/Screens/SideMenu/Daliy%20notes/bloc/daily_notes_bloc.dart';
+import 'package:adhd/Screens/SideMenu/Daliy%20notes/bloc/daily_notes_states.dart';
 import 'package:adhd/Screens/SideMenu/Daliy%20notes/daily_notes_questions.dart';
 import 'package:adhd/Screens/SideMenu/Notification/bloc/notification_bloc.dart';
 import 'package:adhd/Screens/SideMenu/Notification/bloc/notification_status.dart';
@@ -51,6 +53,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => EducationalFileCubit()..emit(EducationalFileInitial())),
         BlocProvider(create: (context) => AudioCubit()..emit(AudioInitial())),
         BlocProvider(create: (context) => NotificationCubit()..emit(NotificationInitial())),
+        BlocProvider(create: (context) => DailyNotesCubit()..emit(DailyNotesInit())),
         BlocProvider(
             create: (context) => RoutineBloc()..add(InitialRoutinEvent())),
       ],
