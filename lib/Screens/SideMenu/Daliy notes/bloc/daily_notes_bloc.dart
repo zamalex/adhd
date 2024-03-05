@@ -51,8 +51,30 @@ class DailyNotesCubit extends Cubit<DailyNotesState> {
       questions[qIndex].selectedIndex=question.selectedIndex;
 
 
+
       print(questions[qIndex].selectedIndex.toString());
       emit(ListDailyNotesQuestionsState(questions,subUsers));
+
+  }
+
+  void submitAnswers(String patientID){
+    Map request ={
+      'patientID':patientID
+    };
+
+    List answers = [];
+    questions.forEach((element) {
+      Map t = {};
+      t.putIfAbsent('reportQuestionID', () =>element.id);
+      String answerEn = element.selectedIndex==0?'Often':element.selectedIndex==1?'Sometimes':'Rarely';
+      String answerAr = element.selectedIndex==0?'Often':element.selectedIndex==1?'Sometimes':'Rarely';
+      t.putIfAbsent('answerEn', () =>answerEn);
+      t.putIfAbsent('answerAr', () =>answerAr);
+
+      answers.add(t);
+    });
+    request.putIfAbsent('reportQIDAndA', () =>answers);
+    print('request : ${jsonEncode(request)}');
 
   }
 }

@@ -1,4 +1,5 @@
 import 'package:adhd/Models/daily_notes_questions_response.dart';
+import 'package:adhd/Models/sub_user.dart';
 import 'package:adhd/Screens/SideMenu/Daliy%20notes/bloc/daily_notes_states.dart';
 import 'package:adhd/Utilities/constants.dart';
 import 'package:adhd/widgets/Utilities/custom_appbar_widget.dart';
@@ -26,8 +27,12 @@ class _DailyNotesQuestionsScreenState extends State<DailyNotesQuestionsScreen> {
       context.read<DailyNotesCubit>().getDailyNotesQuestionsList();
     });
   }
+
+
   @override
   Widget build(BuildContext context) {
+    SubUser subUser =  ModalRoute.of(context)!.settings.arguments as SubUser;
+
     // TODO: implement build
  return Scaffold(
       backgroundColor: Constants.WHITE_BACKGROUND,
@@ -41,7 +46,15 @@ class _DailyNotesQuestionsScreenState extends State<DailyNotesQuestionsScreen> {
         builder:(c,state){
           return state is DailyNotesLoadingState?Center(child: CircularProgressIndicator(),):state is ListDailyNotesQuestionsState? Padding(
             padding: EdgeInsets.all(16),
-            child: _dailyNotesQuestionsList(questions: state.questions,),
+            child: Column(
+              children: [
+                Expanded(child: _dailyNotesQuestionsList(questions: state.questions,)),
+                TextButton(onPressed: (){
+                  context.read<DailyNotesCubit>().submitAnswers(subUser.id!);
+                }, child:Text('Submit'))
+              ]
+              ,
+            ),
           ):Container();
       }
       ),
