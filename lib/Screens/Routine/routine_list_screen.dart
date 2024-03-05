@@ -20,7 +20,7 @@ class RoutineListScreen extends StatelessWidget {
           routines = state.routines;
         }
         if (state is ShowRoutinDetailsState) {
-          Navigator.pushNamed(context, RoutineQuestiionsScreen.id);
+          
         }
       },
       builder: (context, state) {
@@ -46,20 +46,35 @@ class RoutineListScreen extends StatelessWidget {
 class _routineList extends StatelessWidget {
   List<RoutinModel> routines = [];
   _routineList(this.routines);
+
+  bool checkAvailable(int index) {
+    if (index == 0) {
+      return true;
+    } else if ((routines[index].isAvailable ?? false)) {
+      return true;
+    } else if ((routines[index - 1].isAvailable ?? false)) {
+      return true;
+    }
+
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return ListView.separated(
       itemBuilder: (context, index) => Opacity(
-        opacity: routines[index].isAvailable?1:.3,
+        opacity: checkAvailable(index) ? 1 : .3,
         child: RoutineWidget(
-          routine: routines[index],
-          onTap: () {
-            context
-                .read<RoutineBloc>()
-                .add(GoRoutinDetailsEvent(routines[index]));
-          },
-        ),
+            routine: routines[index],
+            onTap: () {
+              if (checkAvailable(index)) {
+                Navigator.pushNamed(context, RoutineQuestiionsScreen.id);
+
+                context.read<RoutineBloc>().add(GoRoutinDetailsEvent(
+                    routines[index], routines[index].id ?? 0));
+              }
+            }),
       ),
       // scrollDirection: Axis.horizontal,
       itemCount: routines.length,

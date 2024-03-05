@@ -26,6 +26,7 @@ class RoutineWidget extends StatelessWidget {
           color: Constants.WHITE_BACKGROUND,
           surfaceTintColor: Constants.WHITE_BACKGROUND,
           child: Row(
+          
             children: [
               Container(
                 height: 103,
@@ -45,6 +46,7 @@ class RoutineWidget extends StatelessWidget {
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     routine.titleEn ?? "",

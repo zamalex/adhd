@@ -68,7 +68,12 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         // TODO: implement listener
         if (state is UserLoggedinState) {
-          Navigator.pushNamed(context, RoutineListScreen.id);
+           Navigator.pushReplacement<void, void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => RoutineListScreen(),
+                  ),
+                );
         }else if(state is GoCodeState){
           Navigator.pushNamed(context, ForgetPasswordCodeScreen.id,arguments: {'email':state.email,'code':state.code});
 

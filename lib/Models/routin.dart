@@ -29,7 +29,7 @@ class RoutinModel extends Equatable {
   int? id;
   int? duration;
   String? image;
-  bool isAvailable = true;
+  bool? isAvailable;
   List<RoutinQuestionModel>? questions;
 
   RoutinModel(
@@ -38,6 +38,7 @@ class RoutinModel extends Equatable {
       this.titleEn,
       this.duration,
       this.image,
+      this.isAvailable,
       this.questions});
 
   factory RoutinModel.fromJson(Map<String, dynamic>? json) => RoutinModel(
@@ -46,6 +47,7 @@ class RoutinModel extends Equatable {
         titleEn: json?["titleEn"] ?? "",
         duration: json?["taskDuration"] ?? 0,
         image: json?["image"] ?? "",
+        isAvailable: json?["isDone"] ?? false,
         questions: json!["routineList"] != null
             ? List<RoutinQuestionModel>.from(
                 json["routineList"].map((x) => RoutinQuestionModel.fromJson(x)))
@@ -63,8 +65,6 @@ class RoutinQuestionModel extends Equatable {
   int? id;
   bool? done;
 
-
-  
   RoutinQuestionModel({this.id, this.titleAr, this.titleEn});
 
   factory RoutinQuestionModel.fromJson(Map<String, dynamic>? json) =>
@@ -77,7 +77,6 @@ class RoutinQuestionModel extends Equatable {
         "routinePointID": id,
         "done": done.toString(),
         "doneAr": done.toString(),
-       
       };
   @override
   // TODO: implement props

@@ -19,10 +19,11 @@ class ListRoutinState extends RoutineState {
 
 class ShowRoutinDetailsState extends RoutineState {
   final RoutinModel routine;
-  const ShowRoutinDetailsState(this.routine);
+  final int id ;
+  const ShowRoutinDetailsState(this.routine, this.id);
 
   @override
-  List<Object> get props => [routine];
+  List<Object> get props => [routine, id];
 }
 
 class FaildState extends RoutineState {

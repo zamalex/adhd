@@ -15,9 +15,10 @@ class InitialRoutinEvent extends RoutineEvent {
 
 class GoRoutinDetailsEvent extends RoutineEvent {
   final RoutinModel routinModel;
-  const GoRoutinDetailsEvent(this.routinModel);
+  final int id ;
+  const GoRoutinDetailsEvent(this.routinModel, this.id);
   @override
-  List<Object> get props => [routinModel];
+  List<Object> get props => [routinModel, id];
 }
 
 class SubmitRoutineAnswersEvent extends RoutineEvent {

@@ -49,6 +49,7 @@ dependencies:
   flutter_bloc: any
   audioplayers: any
   webview_flutter: ^4.7.0
+  confetti: any
 
 dev_dependencies:
   flutter_test:

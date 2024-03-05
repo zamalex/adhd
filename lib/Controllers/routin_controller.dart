@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:adhd/Models/sub_user.dart';
+
 import '../Models/routin.dart';
 import 'Utilites/api_connection.dart';
 import 'Utilites/urls.dart';
@@ -77,5 +79,28 @@ class RoutinController {
    }catch(e){
      return {'success':false,'message':e.toString()};
    }
+  }
+
+
+  static Future<Map<String,dynamic>> getSubUsersList() async {
+
+
+    try{
+      var response = await ApiConnection.get(URL.GET_SUB_URL,null);
+
+      var success = SubUsersResponse.fromJson(response).statusCode ?? 0;
+      var message = SubUsersResponse.fromJson(response).message ?? "";
+      var subUsers = SubUsersResponse.fromJson(response).subUsers ?? [];
+
+      if (success == 200 || success == 201) {
+        return {'success':true,'message':message,'data':subUsers};
+      } else {
+        print(message);
+
+        return {'success':false,'message':message,'data':[]};
+      }
+    }catch(e){
+      return {'success':false,'message':e.toString(),'data':[]};
+    }
   }
 }

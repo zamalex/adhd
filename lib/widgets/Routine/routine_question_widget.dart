@@ -13,7 +13,7 @@ class RoutineQuestionWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(question.titleEn ?? ""),
+        Text(question.titleEn ?? "", style: TextStyle(fontSize: 17),),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -58,8 +58,8 @@ class _choiceButtonWidget extends StatelessWidget {
         onTap(true);
       },
       child: Container(
-        height: 18,
-        width: 18,
+        height: 30,
+        width: 30,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(9),
           border: Border.all(color: isSelected ? Colors.green : Colors.black),

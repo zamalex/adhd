@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 // import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../Controllers/Utilites/urls.dart';
 import 'constants.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -119,7 +120,15 @@ class StaticFunctions {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('access_token', token);
   }
-
+static Future<String> getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('access_token');
+    print(token);
+    if (token != "" || token != null) {
+      URL.USER_TOKEN = token ?? "";
+    }
+    return token ?? "";
+  }
 
   // static Future<void> setFirstInstall() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();

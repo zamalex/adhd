@@ -1,10 +1,14 @@
+import 'package:adhd/Screens/Auth/login_screen.dart';
 import 'package:adhd/Screens/SideMenu/Notification/my_notifications_screen.dart';
 import 'package:adhd/Screens/SideMenu/Video_Screens/video_list_screen.dart';
 import 'package:adhd/Screens/SideMenu/file_screens/file_list_screen.dart';
 import 'package:adhd/Utilities/constants.dart';
+import 'package:adhd/Utilities/static_functions.dart';
 import 'package:adhd/widgets/Routine/routine_question_widget.dart';
 import 'package:adhd/widgets/Utilities/custom_appbar_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../../Controllers/Utilites/urls.dart';
 
 class SideMenuParentScreen extends StatelessWidget {
   static const String id = "side_menu_parent";
@@ -37,10 +41,7 @@ class SideMenuParentScreen extends StatelessWidget {
               title: "Interesting tips",
               image: "${Constants.LOCAL_IMAGE_PATH}carbon_security.png",
               onTap: () {
-
-              Navigator.pushNamed(context, FileListScreen.id);
-
-
+                Navigator.pushNamed(context, FileListScreen.id);
               }),
           const SizedBox(
             height: 50,
@@ -71,7 +72,9 @@ class SideMenuParentScreen extends StatelessWidget {
           sideMenuRow(
               title: "Log out",
               image: "${Constants.LOCAL_IMAGE_PATH}tabler_logout.png",
-              onTap: () {}),
+              onTap: () {
+               
+              }),
         ]),
       ),
     );

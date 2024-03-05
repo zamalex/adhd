@@ -3,6 +3,7 @@ import 'package:adhd/Screens/Auth/ForgetPassword/forget_password_receiver_screen
 import 'package:adhd/Screens/Auth/ForgetPassword/reset_paswword_screen.dart';
 import 'package:adhd/Screens/Auth/login_screen.dart';
 import 'package:adhd/Screens/Home/home_screen.dart';
+import 'package:adhd/Screens/Home/splash_screen.dart';
 import 'package:adhd/Screens/Onboarding/onboarding.dart';
 import 'package:adhd/Screens/Routine/bloc/routine_bloc.dart';
 import 'package:adhd/Screens/Routine/routine_list_screen.dart';
@@ -10,6 +11,7 @@ import 'package:adhd/Screens/Routine/routine_questions.dart';
 import 'package:adhd/Screens/SideMenu/Audio_Screens/audio_list_screen.dart';
 import 'package:adhd/Screens/SideMenu/Audio_Screens/bloc/audio_list_bloc.dart';
 import 'package:adhd/Screens/SideMenu/Audio_Screens/bloc/audio_list_status.dart';
+import 'package:adhd/Screens/SideMenu/Chat/chat_screen.dart';
 import 'package:adhd/Screens/SideMenu/Daliy%20notes/daily_notes_questions.dart';
 import 'package:adhd/Screens/SideMenu/Notification/bloc/notification_bloc.dart';
 import 'package:adhd/Screens/SideMenu/Notification/bloc/notification_status.dart';
@@ -27,6 +29,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Screens/Auth/bloc/auth_bloc.dart';
+import 'Screens/SideMenu/Daliy notes/daily_notes_sub_users.dart';
 import 'Screens/SideMenu/Notification/new_message_screen.dart';
 import 'Screens/SideMenu/file_screens/bloc/educational_files_status.dart';
 import 'Screens/SideMenu/followup_forms/followup_forms_screen.dart';
@@ -74,7 +77,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             fontFamily: 'Atkinson Hyperlegible',
           ),
-          home: LoginScreen(),
+          home: SplashScreen(),
           routes: {
             RoutineQuestiionsScreen.id: (context) => RoutineQuestiionsScreen(),
             SideMenuScreen.id: (context) => SideMenuScreen(),
@@ -86,6 +89,8 @@ class MyApp extends StatelessWidget {
             ReportListScreen.id: (context) => ReportListScreen(),
             DailyNotesQuestionsScreen.id: (context) =>
                 DailyNotesQuestionsScreen(),
+            DailyNotesSubUsersScreen.id: (context) =>
+                DailyNotesSubUsersScreen(),
             FollowupFromsScreen.id: (context) => FollowupFromsScreen(),
             LoginScreen.id: (context) => LoginScreen(),
             ForgetPassword.id: (context) => ForgetPassword(),
@@ -94,6 +99,8 @@ class MyApp extends StatelessWidget {
             ForgetPasswordCodeScreen.id: (context) => ForgetPasswordCodeScreen(),
             ResetPassword.id: (context) => ResetPassword(),
             AudioListScreen.id: (context) => AudioListScreen(),
+            OnboardingScreen.id: (context) => OnboardingScreen(),
+            ChatScreeen.id: (context) => ChatScreeen(),
           }),
     );
   }

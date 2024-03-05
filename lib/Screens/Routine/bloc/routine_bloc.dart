@@ -31,7 +31,7 @@ class RoutineBloc extends Bloc<RoutineEvent, RoutineState> {
        on<GoRoutinDetailsEvent>((event, emit) async {
       // TODO: implement event handler
      
-        emit(ShowRoutinDetailsState(event.routinModel));
+        emit(ShowRoutinDetailsState(event.routinModel, event.id));
     
     });
       on<AnswerRoutineeQueestion>((event, emit) async {
@@ -44,7 +44,7 @@ class RoutineBloc extends Bloc<RoutineEvent, RoutineState> {
       on<SubmitRoutineAnswersEvent>((event, emit) async {
       // TODO: implement event handler
 
-        emit(RoutineLoadingState());
+        // emit(RoutineLoadingState());
         Map<String,dynamic> body={};
         List<Map>answersList=[];
         bool answered = true;

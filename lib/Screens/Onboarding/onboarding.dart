@@ -1,9 +1,11 @@
+import 'package:adhd/Screens/Auth/login_screen.dart';
 import 'package:adhd/Utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_onboard/flutter_onboard.dart';
 
 class OnboardingScreen extends StatelessWidget {
   final PageController _pageController = PageController();
+  static const String id = "onboarding";
 
   final List<OnBoardModel> onBoardData = [
     const OnBoardModel(
@@ -23,7 +25,7 @@ class OnboardingScreen extends StatelessWidget {
       imgUrl: 'assets/images/TM-Blog-ADHD 1.png',
     ),
   ];
-    void _onNextTap(OnBoardState onBoardState) {
+  void _onNextTap(OnBoardState onBoardState, BuildContext context) {
     if (!onBoardState.isLastPage) {
       _pageController.animateToPage(
         onBoardState.page + 1,
@@ -32,6 +34,8 @@ class OnboardingScreen extends StatelessWidget {
       );
     } else {
       //print("nextButton pressed");
+                                        Navigator.pushNamed(context, LoginScreen.id);
+
     }
   }
 
@@ -40,7 +44,7 @@ class OnboardingScreen extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       body: OnBoard(
-        titleStyles: TextStyle(fontFamily: Constants.FONT_FAMILY_NAME) ,
+        titleStyles: TextStyle(fontFamily: Constants.FONT_FAMILY_NAME),
         onBoardData: onBoardData,
 
         pageController: _pageController,
@@ -50,7 +54,7 @@ class OnboardingScreen extends StatelessWidget {
         //   // width: 150,
 
         // ),
-           pageIndicatorStyle:  PageIndicatorStyle(
+        pageIndicatorStyle: PageIndicatorStyle(
           width: 150,
           inactiveColor: Constants.MAIN_COLOR,
           activeColor: Constants.MAIN_COLOR,
@@ -58,16 +62,25 @@ class OnboardingScreen extends StatelessWidget {
           activeSize: const Size(12, 12),
         ),
         // Either Provide onSkip Callback or skipButton Widget to handle skip state
-        // onSkip: () {
-        //   print('skipped');
-        // },
-        skipButton: SizedBox(height: 0,width: 0,),
+        onSkip: () {
+                      Navigator.pushNamed(context, LoginScreen.id);
+        },
+          onDone: () {
+                                  Navigator.pushNamed(context, LoginScreen.id);
+
+    },
+        skipButton: SizedBox(
+          height: 0,
+          width: 0,
+        ),
         // Either Provide onDone Callback or nextButton Widget to handle done state
+        
         nextButton: OnBoardConsumer(
           builder: (context, ref, child) {
             final state = ref.watch(onBoardStateProvider);
             return InkWell(
-              onTap: () => _onNextTap(state),
+              onTap: () => _onNextTap(state, context),
+                
               child: Container(
                 width: 230,
                 height: 50,

@@ -1,5 +1,7 @@
 import 'package:adhd/Screens/SideMenu/Audio_Screens/audio_list_screen.dart';
+import 'package:adhd/Screens/SideMenu/Chat/chat_screen.dart';
 import 'package:adhd/Screens/SideMenu/Daliy%20notes/daily_notes_questions.dart';
+import 'package:adhd/Screens/SideMenu/Daliy%20notes/daily_notes_sub_users.dart';
 import 'package:adhd/Screens/SideMenu/Notification/my_notifications_screen.dart';
 import 'package:adhd/Screens/SideMenu/Notification/notifications_list_screen.dart';
 import 'package:adhd/Screens/SideMenu/Reports/report_list.dart';
@@ -10,6 +12,10 @@ import 'package:adhd/Utilities/constants.dart';
 import 'package:adhd/widgets/Routine/routine_question_widget.dart';
 import 'package:adhd/widgets/Utilities/custom_appbar_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../../Controllers/Utilites/urls.dart';
+import '../../Utilities/static_functions.dart';
+import '../Auth/login_screen.dart';
 
 class SideMenuScreen extends StatelessWidget {
   static const String id = "side_menu";
@@ -28,15 +34,15 @@ class SideMenuScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(16),
         child: ListView(children: [
-          // sideMenuRow(
-          //   title: "Daily notes",
-          //   visable: true,
-          //   isFirst: false,
-          //   image: "${Constants.LOCAL_IMAGE_PATH}HeroIcon (TailWind).png",
-          //   onTap: () {
-          //     Navigator.pushNamed(context, DailyNotesQuestionsScreen.id);
-          //   },
-          // ),
+           sideMenuRow(
+             title: "Daily notes",
+             visable: true,
+             isFirst: false,
+             image: "${Constants.LOCAL_IMAGE_PATH}HeroIcon (TailWind).png",
+             onTap: () {
+               Navigator.pushNamed(context, DailyNotesSubUsersScreen.id);
+             },
+           ),
 
           sideMenuRow(
             title: "Educational videos",
@@ -52,7 +58,7 @@ class SideMenuScreen extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(context, FileListScreen.id);
               }),
-           sideMenuRow(
+          sideMenuRow(
               title: "Follow-up forms",
               visable: false,
               image: "${Constants.LOCAL_IMAGE_PATH}carbon_security.png",
@@ -84,7 +90,7 @@ class SideMenuScreen extends StatelessWidget {
               }),
 
           //
-         /* sideMenuRow(
+          /* sideMenuRow(
               title: "Self help",
               visable: true,
               image: "${Constants.LOCAL_IMAGE_PATH}carbon_help.png",
@@ -95,11 +101,15 @@ class SideMenuScreen extends StatelessWidget {
               visable: true,
               image: "${Constants.LOCAL_IMAGE_PATH}carbon_help-2.png",
               onTap: () {
-
                 Navigator.pushNamed(context, AudioListScreen.id);
-
               }),
-
+ sideMenuRow(
+              title: "Chat",
+              visable: true,
+              image: "${Constants.LOCAL_IMAGE_PATH}messenger.png",
+              onTap: () {
+                Navigator.pushNamed(context, ChatScreeen.id);
+              }),
           sideMenuRow(
               title: "Notifications",
               visable: true,
@@ -111,7 +121,17 @@ class SideMenuScreen extends StatelessWidget {
           sideMenuRow(
               title: "Log out",
               image: "${Constants.LOCAL_IMAGE_PATH}tabler_logout.png",
-              onTap: () {}),
+              onTap: () {
+                print("logout");
+                URL.USER_TOKEN = "";
+                StaticFunctions.removeToken();
+                Navigator.pushReplacement<void, void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => LoginScreen(),
+                  ),
+                );
+              }),
         ]),
       ),
     );
