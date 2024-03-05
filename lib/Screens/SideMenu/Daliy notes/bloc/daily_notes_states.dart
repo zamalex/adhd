@@ -1,3 +1,4 @@
+import 'package:adhd/Models/daily_notes_questions_response.dart';
 import 'package:adhd/Models/sub_user.dart';
 import 'package:equatable/equatable.dart';
 
@@ -16,6 +17,17 @@ class ListSubUsersState extends DailyNotesState {
 
   @override
   List<Object> get props => [subUsers];
+}
+
+
+class ListDailyNotesQuestionsState extends DailyNotesState {
+  final List<DailyNotesQuestion> questions;
+  final List<SubUser> subUsers;
+
+  const ListDailyNotesQuestionsState(this.questions,this.subUsers);
+
+  @override
+  List<Object> get props => [questions,subUsers];
 }
 
 

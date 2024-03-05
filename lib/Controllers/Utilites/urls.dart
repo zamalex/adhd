@@ -30,6 +30,7 @@ class URL {
   static String POST_ROUTIN_URL = DOMAIN_WITH_PARTITION + "RouitnePointAnswer";
   static String POST_CHILD_ROUTIN_URL = DOMAIN_WITH_PARTITION + "PatientRoutineAnswer";
   static String GET_SUB_URL = DOMAIN_WITH_PARTITION + "Sub";
+  static String GET_DAILY_NOTES_QUESTIONS_URL = DOMAIN_WITH_PARTITION + "TrainerReportQuestions";
 
   static String userID='';
   static String userType = '';

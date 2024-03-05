@@ -1,12 +1,31 @@
+import 'package:adhd/Models/daily_notes_questions_response.dart';
+import 'package:adhd/Screens/SideMenu/Daliy%20notes/bloc/daily_notes_states.dart';
 import 'package:adhd/Utilities/constants.dart';
 import 'package:adhd/widgets/Utilities/custom_appbar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/Daily Notes Quitiions/daily_notes_questions_widget.dart';
+import 'bloc/daily_notes_bloc.dart';
 
-class DailyNotesQuestionsScreen extends StatelessWidget{
+class DailyNotesQuestionsScreen extends StatefulWidget{
     static const String id = "daily_notes_question_screen";
 
+  @override
+  State<DailyNotesQuestionsScreen> createState() => _DailyNotesQuestionsScreenState();
+}
+
+class _DailyNotesQuestionsScreenState extends State<DailyNotesQuestionsScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Future.delayed(Duration.zero).then((value) {
+      context.read<DailyNotesCubit>().getDailyNotesQuestionsList();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -18,24 +37,41 @@ class DailyNotesQuestionsScreen extends StatelessWidget{
           title: "Daily Notes Questions",
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: _dailyNotesQuestionsList(),
+      body: BlocBuilder<DailyNotesCubit,DailyNotesState>(
+        builder:(c,state){
+          return state is DailyNotesLoadingState?Center(child: CircularProgressIndicator(),):state is ListDailyNotesQuestionsState? Padding(
+            padding: EdgeInsets.all(16),
+            child: _dailyNotesQuestionsList(questions: state.questions,),
+          ):Container();
+      }
       ),
     );
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    Future.delayed(Duration.zero).then((value) {
+      context.read<DailyNotesCubit>().getSubUsersList();
+    });
+  }
 }
 
 class _dailyNotesQuestionsList extends StatelessWidget {
+  _dailyNotesQuestionsList({required this.questions});
+  List<DailyNotesQuestion> questions = [];
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return ListView.separated(
       itemBuilder: (context, index) => DailyNotesQuestionWidget(
+        question: questions[index],
       ),
       // scrollDirection: Axis.horizontal,
-      itemCount: 10,
+      itemCount: questions.length,
       separatorBuilder: (BuildContext context, int index) =>  SizedBox(
         height: 20,
         

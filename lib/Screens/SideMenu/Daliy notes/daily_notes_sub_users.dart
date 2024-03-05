@@ -41,10 +41,10 @@ class _DailyNotesSubUsersScreenState extends State<DailyNotesSubUsersScreen> {
         builder:(c,state) {
 
 
-          return state is DailyNotesLoadingState?Center(child: CircularProgressIndicator(),): state is ListSubUsersState? Padding(
+          return state is DailyNotesLoadingState?Center(child: CircularProgressIndicator(),):Padding(
             padding: EdgeInsets.all(16),
-            child: _dailyNotesSubUsersList(subUsers: state.subUsers,),
-          ):Container();
+            child: _dailyNotesSubUsersList(subUsers: context.read<DailyNotesCubit>().subUsers,)
+          );
         }
       ),
     );
@@ -80,7 +80,7 @@ class SubUserWidget extends StatelessWidget {
       title: Text('${subUser.firstName} ${subUser.lastName}'),
       subtitle: Text(subUser.email??''),
       onTap: () {
-        Navigator.pushNamed(context, DailyNotesQuestionsScreen.id);
+        Navigator.pushNamed(context, DailyNotesQuestionsScreen.id,arguments: subUser);
       },
     );
   }

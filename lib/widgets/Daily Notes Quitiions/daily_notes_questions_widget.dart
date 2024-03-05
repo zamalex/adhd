@@ -1,8 +1,12 @@
+import 'package:adhd/Models/daily_notes_questions_response.dart';
 import 'package:adhd/Utilities/constants.dart';
 import 'package:adhd/widgets/Utilities/button_widget.dart';
 import 'package:flutter/material.dart';
 
 class DailyNotesQuestionWidget extends StatelessWidget {
+
+  DailyNotesQuestionWidget({required this.question});
+  DailyNotesQuestion question;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -10,7 +14,7 @@ class DailyNotesQuestionWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("question 1", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+         Text(question.questionEn??'', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
         const SizedBox(
           height: 5,
         ),

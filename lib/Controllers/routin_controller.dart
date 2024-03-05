@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:adhd/Models/daily_notes_questions_response.dart';
 import 'package:adhd/Models/sub_user.dart';
 
 import '../Models/routin.dart';
@@ -94,6 +95,29 @@ class RoutinController {
 
       if (success == 200 || success == 201) {
         return {'success':true,'message':message,'data':subUsers};
+      } else {
+        print(message);
+
+        return {'success':false,'message':message,'data':[]};
+      }
+    }catch(e){
+      return {'success':false,'message':e.toString(),'data':[]};
+    }
+  }
+
+
+  static Future<Map<String,dynamic>> getDailyNotesQuestionsList() async {
+
+
+    try{
+      var response = await ApiConnection.get(URL.GET_DAILY_NOTES_QUESTIONS_URL,null);
+
+      var success = DailyNotesQuestionsResponse.fromJson(response).statusCode ?? 0;
+      var message = DailyNotesQuestionsResponse.fromJson(response).message ?? "";
+      var questions = DailyNotesQuestionsResponse.fromJson(response).data ?? [];
+
+      if (success == 200 || success == 201) {
+        return {'success':true,'message':message,'data':questions};
       } else {
         print(message);
 
