@@ -34,6 +34,7 @@ class SideMenuScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(16),
         child: ListView(children: [
+          if(URL.userType=='Trainer'|| URL.userType=='ADHDAppPsycho')
            sideMenuRow(
              title: "Daily notes",
              visable: true,

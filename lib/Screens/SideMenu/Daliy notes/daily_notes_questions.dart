@@ -58,7 +58,12 @@ class _DailyNotesQuestionsScreenState extends State<DailyNotesQuestionsScreen> {
             ),
           );
       }, listener: (BuildContext context, DailyNotesState state) {
-        if(state is DailyNotesDoneState||state is FaildState){
+        if(state is DailyNotesDoneState){
+          StaticFunctions.showSuccessNote(context,state.props[0].toString(),(){
+            Navigator.pop(context);
+          });
+        }
+        else if (state is FaildState){
           StaticFunctions.showErrorNote(context,state.props[0].toString());
         }
       },

@@ -75,14 +75,12 @@ class DailyNotesCubit extends Cubit<DailyNotesState> {
       answers.add(t);
     });
     request.putIfAbsent('reportQIDAndA', () =>answers);
-    print('request : ${jsonEncode(request)}');
 
     try {
       Map result  = await RoutinController.submiSubUserAnswers(request);
 
       bool success = result['success'];
 
-      print(result['message']);
 
       if(success){
         emit(DailyNotesDoneState(result['message']));
