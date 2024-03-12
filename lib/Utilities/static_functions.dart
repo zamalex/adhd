@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:adhd/Models/sub_user.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 // import 'package:flushbar/flushbar.dart';
@@ -128,6 +131,31 @@ static Future<String> getToken() async {
       URL.USER_TOKEN = token ?? "";
     }
     return token ?? "";
+  }
+
+
+  static Future<void> saveChild(SubUser? child) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if(child!=null)
+    prefs.setString('child', jsonEncode(child.toJson()));
+    else{
+      prefs.remove('child');
+
+    }
+  }
+static Future<SubUser?> getChild() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('child');
+    if(token ==null){
+      return null;
+    }
+    
+    SubUser? subUser = SubUser.fromJson(jsonDecode(token));
+
+
+      URL.selectedChild = subUser;
+
+    return subUser;
   }
 
   // static Future<void> setFirstInstall() async {

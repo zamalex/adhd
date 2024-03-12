@@ -7,6 +7,10 @@ sealed class RoutineEvent extends Equatable {
   List<Object> get props => [];
 }
 class InitialRoutinEvent extends RoutineEvent {
+
+  InitialRoutinEvent({this.subUser});
+  SubUser? subUser;
+
   @override
   List<Object> get props => [""];
 }

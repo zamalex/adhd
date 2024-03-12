@@ -46,6 +46,21 @@ class SubUser {
         this.email,
         this.image});
 
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'firstName': firstName,
+      'lastName': lastName,
+      'birthPlace': birthPlace,
+      'religion': religion,
+      'gender': gender,
+      'birthDate': birthDate,
+      'creationTime': creationTime,
+      'email': email,
+      'image': image,
+    };
+  }
   SubUser.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     firstName = json['firstName'];

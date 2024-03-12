@@ -34,16 +34,16 @@ class SideMenuScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(16),
         child: ListView(children: [
-          if(URL.userType=='Trainer'|| URL.userType=='ADHDAppPsycho')
-           sideMenuRow(
-             title: "Daily notes",
-             visable: true,
-             isFirst: false,
-             image: "${Constants.LOCAL_IMAGE_PATH}HeroIcon (TailWind).png",
-             onTap: () {
-               Navigator.pushNamed(context, DailyNotesSubUsersScreen.id);
-             },
-           ),
+          sideMenuRow(
+            title: "Daily notes",
+            visable:
+                URL.userType == 'Trainer' || URL.userType == 'ADHDAppPsycho',
+            isFirst: false,
+            image: "${Constants.LOCAL_IMAGE_PATH}HeroIcon (TailWind).png",
+            onTap: () {
+              Navigator.pushNamed(context, DailyNotesSubUsersScreen.id);
+            },
+          ),
 
           sideMenuRow(
             title: "Educational videos",
@@ -99,12 +99,12 @@ class SideMenuScreen extends StatelessWidget {
 */
           sideMenuRow(
               title: "Mindfulness",
-              visable: true,
+              visable: URL.userType == 'Child',
               image: "${Constants.LOCAL_IMAGE_PATH}carbon_help-2.png",
               onTap: () {
                 Navigator.pushNamed(context, AudioListScreen.id);
               }),
- sideMenuRow(
+          sideMenuRow(
               title: "Chat",
               visable: true,
               image: "${Constants.LOCAL_IMAGE_PATH}messenger.png",
@@ -113,7 +113,7 @@ class SideMenuScreen extends StatelessWidget {
               }),
           sideMenuRow(
               title: "Notifications",
-              visable: true,
+              visable: URL.userType == 'Child',
               image: "${Constants.LOCAL_IMAGE_PATH}Vector-3.png",
               onTap: () {
                 Navigator.pushNamed(context, MyNotificationsScreen.id);
@@ -125,13 +125,14 @@ class SideMenuScreen extends StatelessWidget {
               onTap: () {
                 print("logout");
                 URL.USER_TOKEN = "";
+                URL.userID = '';
+                URL.userType = '';
+                URL.selectedChild = null;
                 StaticFunctions.removeToken();
-                Navigator.pushReplacement<void, void>(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => LoginScreen(),
-                  ),
-                );
+                StaticFunctions.saveChild(null);
+                Navigator.of(context)
+    .pushNamedAndRemoveUntil(LoginScreen.id, (Route<dynamic> route) => false);
+              
               }),
         ]),
       ),

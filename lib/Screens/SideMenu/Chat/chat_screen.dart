@@ -78,7 +78,7 @@ Page resource error:
 
             /// https://olearn.onesttech.com/payments/verify/Stripe?status=success
             // if (request.url.toLowerCase().contains("status=success")) {
-            //   NavUtil.pushAndRemoveUntil(context, const BottomNavBar());
+              // NavUtil.pushAndRemoveUntil(context, const BottomNavBar());
             // } else {
             //   // CustomDialog.showMessage(context);
             // }

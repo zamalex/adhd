@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:adhd/Screens/Auth/ForgetPassword/forger_password_code_screen.dart';
 import 'package:adhd/Screens/Auth/ForgetPassword/forget_password_receiver_screen.dart';
 import 'package:adhd/Screens/Routine/routine_list_screen.dart';
+import 'package:adhd/Screens/SideMenu/Daliy%20notes/daily_notes_sub_users.dart';
 import 'package:adhd/widgets/Auth/email_textfield_widget.dart';
 import 'package:adhd/widgets/Auth/password_textfiekd_widget.dart';
 import 'package:adhd/widgets/Utilities/button_widget.dart';
@@ -10,9 +11,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../Controllers/Utilites/urls.dart';
 import '../../Utilities/constants.dart';
 import '../../Utilities/static_functions.dart';
 import '../../widgets/Utilities/custom_appbar_widget.dart';
+import '../Routine/bloc/routine_bloc.dart';
+import '../SideMenu/sidemenu_screen.dart';
 import 'bloc/auth_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -68,22 +72,29 @@ class LoginScreen extends StatelessWidget {
       listener: (context, state) {
         // TODO: implement listener
         if (state is UserLoggedinState) {
-           Navigator.pushReplacement<void, void>(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => RoutineListScreen(),
-                  ),
-                );
-        }else if(state is GoCodeState){
-          Navigator.pushNamed(context, ForgetPasswordCodeScreen.id,arguments: {'email':state.email,'code':state.code});
+          if (URL.userType == 'Trainer') {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                SideMenuScreen.id, (Route<dynamic> route) => false);
+          }else if(URL.userType=='Teacher'){
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                DailyNotesSubUsersScreen.id, (Route<dynamic> route) => false);
+          }
+          else if(URL.userType=='Parent'){
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                DailyNotesSubUsersScreen.id, (Route<dynamic> route) => false);
+          }
+          else {
+            context.read<RoutineBloc>().add(InitialRoutinEvent());
 
-        }
-
-        else if (state is FaildState) {
-
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                RoutineListScreen.id, (Route<dynamic> route) => false);
+          }
+        } else if (state is GoCodeState) {
+          Navigator.pushNamed(context, ForgetPasswordCodeScreen.id,
+              arguments: {'email': state.email, 'code': state.code});
+        } else if (state is FaildAuthState) {
           StaticFunctions.showErrorNote(context, state.msg);
-                  //  Navigator.pushNamed(context, RoutineListScreen.id);
-
+          //  Navigator.pushNamed(context, RoutineListScreen.id);
         }
         // else if (state is GoForgetState){
 

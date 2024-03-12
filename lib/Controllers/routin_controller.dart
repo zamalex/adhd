@@ -8,7 +8,7 @@ import 'Utilites/api_connection.dart';
 import 'Utilites/urls.dart';
 
 class RoutinController {
-  static Future<List<RoutinModel>> get() async {
+  static Future<List<RoutinModel>> get({SubUser? subUser}) async {
 
     try{
       if(URL.userID.isEmpty){
@@ -19,9 +19,20 @@ class RoutinController {
         print('type is ${URL.userType}');
 
       }
+      String tempId = URL.userID;
+
+      if(URL.userType=='Parent'){
+        subUser = URL.selectedChild;
+      }
+      if(subUser!=null){
+        URL.userID = subUser.id!;
+      }
+
+      print('id is ${URL.userID}');
 
       var response = await ApiConnection.get(URL.GET_ROUTIN_URL, null);
 
+      URL.userID  = tempId;
       var success = RoutinResponse.fromJson(response).code ?? 0;
       var message = RoutinResponse.fromJson(response).message ?? "";
       var data = RoutinResponse.fromJson(response).data;
@@ -40,11 +51,18 @@ class RoutinController {
   }
 
 
-  static Future<Map<String,dynamic>> submitAnswers(Map<String,dynamic> body) async {
+  static Future<Map<String,dynamic>> submitAnswers(Map<String,dynamic> body,SubUser? subUser) async {
 
 
    try{
+
+     String tempId = URL.userID;
+     if(subUser!=null){
+       URL.userID = subUser.id!;
+     }
      var response = await ApiConnection.post(URL.POST_ROUTIN_URL, jsonEncode(body));
+
+     URL.userID  = tempId;
 
      var success = RoutinResponse.fromJson(response).code ?? 0;
      var message = RoutinResponse.fromJson(response).message ?? "";
@@ -88,7 +106,7 @@ class RoutinController {
 
 
    try{
-     var response = await ApiConnection.post(URL.SUBMIT_SUB_USER_ANSWER_URL, jsonEncode(body));
+     var response = await ApiConnection.post('${URL.SUBMIT_SUB_USER_ANSWER_URL}/${URL.userType}', jsonEncode(body));
 
      var success = RoutinResponse.fromJson(response).code ?? 0;
      var message = RoutinResponse.fromJson(response).message ?? "";

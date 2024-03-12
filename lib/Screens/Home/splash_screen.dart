@@ -1,8 +1,12 @@
 import 'dart:io';
 
+import 'package:adhd/Models/sub_user.dart';
 import 'package:adhd/Screens/Auth/login_screen.dart';
+import 'package:adhd/Screens/Routine/bloc/routine_bloc.dart';
+import 'package:adhd/Screens/SideMenu/sidemenu_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../Controllers/Utilites/urls.dart';
 import '../../Controllers/profile_controller.dart';
@@ -10,6 +14,7 @@ import '../../Utilities/constants.dart';
 import '../../Utilities/static_functions.dart';
 import '../Onboarding/onboarding.dart';
 import '../Routine/routine_list_screen.dart';
+import '../SideMenu/Daliy notes/daily_notes_sub_users.dart';
 import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,6 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
     print("profile");
     String token = await StaticFunctions.getToken();
     print(token);
+    SubUser? child = await StaticFunctions.getChild();
+
     if (token != "") {
       URL.USER_TOKEN = token;
       // }
@@ -33,11 +40,35 @@ class _SplashScreenState extends State<SplashScreen> {
         // if (Constants.PLAYER_ID != "") {
         //   // NotificationController.subscribe(Constants.PLAYER_ID);
         // }
-        Navigator.pushReplacementNamed(context, RoutineListScreen.id);
+        if (URL.userType == 'Trainer') {
+          Navigator.pushReplacementNamed(context, SideMenuScreen.id);
+        }else if (URL.userType == 'Teacher') {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              DailyNotesSubUsersScreen.id, (Route<dynamic> route) => false);
+        }
+        else if (URL.userType == 'Teacher') {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              DailyNotesSubUsersScreen.id, (Route<dynamic> route) => false);
+        }
+
+        else if (URL.userType == 'Parent') {
+          if(child==null){
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                DailyNotesSubUsersScreen.id, (Route<dynamic> route) => false);
+          }else{
+            context.read<RoutineBloc>().add(InitialRoutinEvent(subUser: child));
+            Navigator.pushReplacementNamed(context, RoutineListScreen.id);
+          }
+
+
+        } else {
+          context.read<RoutineBloc>().add(InitialRoutinEvent());
+          Navigator.pushReplacementNamed(context, RoutineListScreen.id);
+        }
       } on SocketException catch (error) {
-      Navigator.pushReplacementNamed(context, OnboardingScreen.id);
+        Navigator.pushReplacementNamed(context, OnboardingScreen.id);
       } catch (error) {
-      Navigator.pushReplacementNamed(context, OnboardingScreen.id);
+        Navigator.pushReplacementNamed(context, OnboardingScreen.id);
       }
     } else {
       Navigator.pushReplacementNamed(context, OnboardingScreen.id);

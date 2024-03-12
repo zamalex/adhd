@@ -22,10 +22,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(UserLoggedinState(UserModel(email: event.email)));
       } on SocketException catch (error) {
         print(error);
-        emit(FaildState(error.toString()));
+        emit(FaildAuthState(error.toString()));
       } catch (error) {
         print("error");
-        emit(FaildState(error.toString()));
+        emit(FaildAuthState(error.toString()));
       }
     });
 
@@ -37,10 +37,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(GoCodeState(event.email,code));
       } on SocketException catch (error) {
         print(error);
-        emit(FaildState(error.toString()));
+        emit(FaildAuthState(error.toString()));
       } catch (error) {
         print("error");
-        emit(FaildState(error.toString()));
+        emit(FaildAuthState(error.toString()));
       }
     });
 
@@ -50,10 +50,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(GoCodeState(event.phone,code));
       } on SocketException catch (error) {
         print(error);
-        emit(FaildState(error.toString()));
+        emit(FaildAuthState(error.toString()));
       } catch (error) {
         print("error");
-        emit(FaildState(error.toString()));
+        emit(FaildAuthState(error.toString()));
       }
     });
 
@@ -65,10 +65,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
          emit(UserLoggedinState(UserModel(email: event.email)));
       } on SocketException catch (error) {
         print(error);
-        emit(FaildState(error.toString()));
+        emit(FaildAuthState(error.toString()));
       } catch (error) {
         print("error");
-        emit(FaildState(error.toString()));
+        emit(FaildAuthState(error.toString()));
       }
     });
   }

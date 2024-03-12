@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:adhd/Controllers/Utilites/urls.dart';
 import 'package:adhd/Controllers/routin_controller.dart';
+import 'package:adhd/Models/sub_user.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -18,7 +19,7 @@ class RoutineBloc extends Bloc<RoutineEvent, RoutineState> {
      on<InitialRoutinEvent>((event, emit) async {
       // TODO: implement event handler
         try {
-       var response = await RoutinController.get();
+       var response = await RoutinController.get(subUser: event.subUser);
         emit(ListRoutinState(response));
       } on SocketException catch (error) {
         print(error);
@@ -67,12 +68,18 @@ class RoutineBloc extends Bloc<RoutineEvent, RoutineState> {
 
         });
 
+
+        SubUser? subUser;
+        if(URL.userType=='Parent'){
+          subUser = URL.selectedChild;
+        }
         body.putIfAbsent('notificationID', () => event.answers.id);
         body.putIfAbsent('routineID', () => event.answers.id);
-        body.putIfAbsent('patientID', () => URL.userID);
-        body.putIfAbsent('parentID', () => null);
+        body.putIfAbsent('patientID', () =>URL.userType=='Parent'?subUser!.id: URL.userID);
+        body.putIfAbsent('parentID', () =>URL.userType=='Parent'?URL.userID: null);
         body.putIfAbsent('routinePoints', () => answersList);
-        var response = URL.userType=='Child'?await RoutinController.submitChildAnswers(body):await RoutinController.submitAnswers(body);
+
+        var response = URL.userType=='Child'?await RoutinController.submitChildAnswers(body):await RoutinController.submitAnswers(body,subUser);
 
         emit(RoutineDoneState(response['message']));
 

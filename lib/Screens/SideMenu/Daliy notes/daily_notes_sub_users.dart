@@ -1,13 +1,17 @@
+import 'package:adhd/Controllers/Utilites/urls.dart';
 import 'package:adhd/Models/sub_user.dart';
+import 'package:adhd/Screens/Routine/routine_list_screen.dart';
 import 'package:adhd/Screens/SideMenu/Daliy%20notes/bloc/daily_notes_bloc.dart';
 import 'package:adhd/Screens/SideMenu/Daliy%20notes/bloc/daily_notes_states.dart';
 import 'package:adhd/Screens/SideMenu/Daliy%20notes/daily_notes_questions.dart';
 import 'package:adhd/Utilities/constants.dart';
+import 'package:adhd/Utilities/static_functions.dart';
 import 'package:adhd/widgets/Utilities/custom_appbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/Daily Notes Quitiions/daily_notes_questions_widget.dart';
+import '../../Routine/bloc/routine_bloc.dart';
 
 class DailyNotesSubUsersScreen extends StatefulWidget {
   static const String id = "daily_notes_sub_users_screen";
@@ -34,7 +38,7 @@ class _DailyNotesSubUsersScreenState extends State<DailyNotesSubUsersScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(52),
         child: CustomAppBar(
-          title: "Daily Notes sub Users",
+          title: "Patients",
         ),
       ),
       body: BlocBuilder<DailyNotesCubit,DailyNotesState>(
@@ -80,6 +84,22 @@ class SubUserWidget extends StatelessWidget {
       title: Text('${subUser.firstName} ${subUser.lastName}'),
       subtitle: Text(subUser.email??''),
       onTap: () {
+        if(URL.userType=='Teacher') {
+          context.read<RoutineBloc>().add(InitialRoutinEvent(subUser: subUser));
+
+          Navigator.pushNamed(
+              context, RoutineListScreen.id, arguments: subUser);
+        }
+        else if(URL.userType=='Parent') {
+          URL.selectedChild = subUser;
+
+          StaticFunctions.saveChild(subUser);
+
+          context.read<RoutineBloc>().add(InitialRoutinEvent(subUser: subUser));
+
+          Navigator.pushNamed(
+              context, RoutineListScreen.id, arguments: subUser);
+        }else
         Navigator.pushNamed(context, DailyNotesQuestionsScreen.id,arguments: subUser);
       },
     );

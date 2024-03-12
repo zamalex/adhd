@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:adhd/Controllers/profile_controller.dart';
 import 'package:adhd/Models/forget_password.dart';
 import 'package:adhd/Utilities/static_functions.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class AuthCoontroller {
     if (success == 200 || success == 201) {
       URL.USER_TOKEN = meta?.token ?? "";
       StaticFunctions.saveToken(meta?.token ?? "");
+      await ProfileController.getProfile();
       return true;
     } else {
       print(message);

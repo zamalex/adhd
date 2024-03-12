@@ -36,9 +36,9 @@ class AuthLoadingState extends AuthState {
   @override
   List<Object> get props => [];
 }
-class FaildState extends AuthState {
+class FaildAuthState extends AuthState {
   final String msg;
-  const FaildState(this.msg);
+  const FaildAuthState(this.msg);
 
   @override
   List<Object> get props => [msg];

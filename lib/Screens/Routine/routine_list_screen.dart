@@ -1,3 +1,4 @@
+import 'package:adhd/Controllers/Utilites/urls.dart';
 import 'package:adhd/Models/routin.dart';
 import 'package:adhd/Screens/Routine/bloc/routine_bloc.dart';
 import 'package:adhd/Screens/Routine/routine_questions.dart';
@@ -24,6 +25,9 @@ class RoutineListScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        if (state is ListRoutinState) {
+          routines = state.routines;
+        }
         return Scaffold(
           backgroundColor: Constants.WHITE_BACKGROUND,
           appBar: PreferredSize(
@@ -50,9 +54,9 @@ class _routineList extends StatelessWidget {
   bool checkAvailable(int index) {
     if (index == 0) {
       return true;
-    } else if ((routines[index].isAvailable ?? false)) {
+    } else if ((routines[index].isAvailable ?? false)||URL.userType!='Child') {
       return true;
-    } else if ((routines[index - 1].isAvailable ?? false)) {
+    } else if ((routines[index - 1].isAvailable ?? false||URL.userType!='Child')) {
       return true;
     }
 

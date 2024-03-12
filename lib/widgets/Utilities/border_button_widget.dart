@@ -33,7 +33,8 @@ class BorderButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => {action()},
         style: ElevatedButton.styleFrom(
-          primary: bgColor ?? Colors.white,
+          //primary: bgColor ?? Colors.white,
+          backgroundColor: bgColor ?? Colors.white,
           side: BorderSide(
             width: 1,
             color: color ?? Constants.MAIN_COLOR,

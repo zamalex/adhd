@@ -13,10 +13,13 @@ class ProfileController {
     var success = UserResponse.fromJson(response).code ?? 0;
     var message = UserResponse.fromJson(response).message ?? "";
     var meta = UserResponse.fromJson(response).meta;
+    // var user = UserResponse.fromJson(response).data ?? UserModel();
 
     if (success == 200 || success == 201) {
       // URL.USER_TOKEN = meta?.token ?? "";
-      
+      // URL.userType =  user.email;
+          List<dynamic> roles = response['data']['roles'];
+        URL.userType =  roles.first.toString();
       // StaticFunctions.saveToken(meta?.token ?? "");
       return true;
     } else {

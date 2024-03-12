@@ -32,7 +32,11 @@ class VideoWidget extends StatelessWidget {
     // TODO: implement build
     return InkWell(
       onTap: () async {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => MediaWebView(video: video,),));
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => MediaWebView(
+            video: video,
+          ),
+        ));
         print("fdsfs");
         // await videoPlayerController.initialize();
 
@@ -46,25 +50,38 @@ class VideoWidget extends StatelessWidget {
         //   controller: chewieController,
         // );
         //                 chewieController.enterFullScreen();
-
       },
-      child: Stack(
-        children: [
-          RoundedImageeNetworkWidget(
-            height: 200,
-            image:
-                video!.image??"https://epe.brightspotcdn.com/d5/8b/827913334eb5af8201910afbfc8b/adhd.jpg",
-          ),
-          Positioned(
-            left: 15,
-            right: 15,
-            bottom: 15,
+      // child: Stack(
+      //   children: [
+      //     RoundedImageeNetworkWidget(
+      //       height: 200,
+      //       image:
+      //           video!.image??"https://epe.brightspotcdn.com/d5/8b/827913334eb5af8201910afbfc8b/adhd.jpg",
+      //     ),
+      //     Positioned(
+      //       left: 15,
+      //       right: 15,
+      //       bottom: 15,
+      //       child: Text(
+      //         video!.titleEn??"Self Help",
+      //         style: TextStyle(fontSize: 24, color: Constants.WHITE_BACKGROUND),
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      child: Card(
+        elevation: 2,
+        color: Constants.WHITE_BACKGROUND,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal:10, vertical: 16),
             child: Text(
-              video!.titleEn??"Self Help",
-              style: TextStyle(fontSize: 24, color: Constants.WHITE_BACKGROUND),
+              video!.titleEn ?? "Self Help",
+              style: TextStyle(fontSize: 24, color: Constants.MAIN_COLOR),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
