@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:adhd/Screens/Auth/ForgetPassword/forger_password_code_screen.dart';
 import 'package:adhd/Screens/Auth/ForgetPassword/forget_password_receiver_screen.dart';
 import 'package:adhd/Screens/Routine/routine_list_screen.dart';
+import 'package:adhd/Screens/Routine/select_child_screen.dart';
 import 'package:adhd/Screens/SideMenu/Daliy%20notes/daily_notes_sub_users.dart';
 import 'package:adhd/widgets/Auth/email_textfield_widget.dart';
 import 'package:adhd/widgets/Auth/password_textfiekd_widget.dart';
@@ -77,11 +78,11 @@ class LoginScreen extends StatelessWidget {
                 SideMenuScreen.id, (Route<dynamic> route) => false);
           }else if(URL.userType=='Teacher'){
             Navigator.of(context).pushNamedAndRemoveUntil(
-                DailyNotesSubUsersScreen.id, (Route<dynamic> route) => false);
+                SelectParentChildScreen.id, (Route<dynamic> route) => false);
           }
           else if(URL.userType=='Parent'){
             Navigator.of(context).pushNamedAndRemoveUntil(
-                DailyNotesSubUsersScreen.id, (Route<dynamic> route) => false);
+                SelectParentChildScreen.id, (Route<dynamic> route) => false);
           }
           else {
             context.read<RoutineBloc>().add(InitialRoutinEvent());

@@ -37,7 +37,7 @@ class SideMenuScreen extends StatelessWidget {
           sideMenuRow(
             title: "Daily notes",
             visable:
-                URL.userType == 'Trainer' || URL.userType == 'ADHDAppPsycho',
+                URL.userType == 'Trainer' || URL.userType == 'ADHDAppPsycho'|| URL.userType == 'Parent',
             isFirst: false,
             image: "${Constants.LOCAL_IMAGE_PATH}HeroIcon (TailWind).png",
             onTap: () {

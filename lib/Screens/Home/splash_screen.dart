@@ -14,6 +14,7 @@ import '../../Utilities/constants.dart';
 import '../../Utilities/static_functions.dart';
 import '../Onboarding/onboarding.dart';
 import '../Routine/routine_list_screen.dart';
+import '../Routine/select_child_screen.dart';
 import '../SideMenu/Daliy notes/daily_notes_sub_users.dart';
 import 'home_screen.dart';
 
@@ -44,17 +45,14 @@ class _SplashScreenState extends State<SplashScreen> {
           Navigator.pushReplacementNamed(context, SideMenuScreen.id);
         }else if (URL.userType == 'Teacher') {
           Navigator.of(context).pushNamedAndRemoveUntil(
-              DailyNotesSubUsersScreen.id, (Route<dynamic> route) => false);
+              SelectParentChildScreen.id, (Route<dynamic> route) => false);
         }
-        else if (URL.userType == 'Teacher') {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              DailyNotesSubUsersScreen.id, (Route<dynamic> route) => false);
-        }
+
 
         else if (URL.userType == 'Parent') {
           if(child==null){
             Navigator.of(context).pushNamedAndRemoveUntil(
-                DailyNotesSubUsersScreen.id, (Route<dynamic> route) => false);
+                SelectParentChildScreen.id, (Route<dynamic> route) => false);
           }else{
             context.read<RoutineBloc>().add(InitialRoutinEvent(subUser: child));
             Navigator.pushReplacementNamed(context, RoutineListScreen.id);

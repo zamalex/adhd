@@ -11,16 +11,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/Daily Notes Quitiions/daily_notes_questions_widget.dart';
-import '../../Routine/bloc/routine_bloc.dart';
+import 'bloc/routine_bloc.dart';
 
-class DailyNotesSubUsersScreen extends StatefulWidget {
-  static const String id = "daily_notes_sub_users_screen";
+class SelectParentChildScreen extends StatefulWidget {
+  static const String id = "select_parent_child_screen";
 
   @override
-  State<DailyNotesSubUsersScreen> createState() => _DailyNotesSubUsersScreenState();
+  State<SelectParentChildScreen> createState() => _SelectParentChildScreenState();
 }
 
-class _DailyNotesSubUsersScreenState extends State<DailyNotesSubUsersScreen> {
+class _SelectParentChildScreenState extends State<SelectParentChildScreen> {
   @override
   void initState() {
     // TODO: implement initState
@@ -38,18 +38,18 @@ class _DailyNotesSubUsersScreenState extends State<DailyNotesSubUsersScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(52),
         child: CustomAppBar(
-          title: "Patients",
+          title: "Children",
         ),
       ),
       body: BlocBuilder<DailyNotesCubit,DailyNotesState>(
-        builder:(c,state) {
+          builder:(c,state) {
 
 
-          return state is DailyNotesLoadingState?Center(child: CircularProgressIndicator(),):Padding(
-            padding: EdgeInsets.all(16),
-            child: _dailyNotesSubUsersList(subUsers: context.read<DailyNotesCubit>().subUsers,)
-          );
-        }
+            return state is DailyNotesLoadingState?Center(child: CircularProgressIndicator(),):Padding(
+                padding: EdgeInsets.all(16),
+                child: _dailyNotesSubUsersList(subUsers: context.read<DailyNotesCubit>().subUsers,)
+            );
+          }
       ),
     );
   }
@@ -89,15 +89,25 @@ class SubUserWidget extends StatelessWidget {
 
           Navigator.pushNamed(
               context, RoutineListScreen.id, arguments: subUser);
+
+
         }
         else if(URL.userType=='Parent') {
 
-            Navigator.pushNamed(context, DailyNotesQuestionsScreen.id,arguments: subUser);
+            URL.selectedChild = subUser;
+
+            StaticFunctions.saveChild(subUser);
+
+            context.read<RoutineBloc>().add(InitialRoutinEvent(subUser: subUser));
+
+            Navigator.pushNamed(
+                context, RoutineListScreen.id, arguments: subUser);
 
 
 
-         }else
-        Navigator.pushNamed(context, DailyNotesQuestionsScreen.id,arguments: subUser);
+
+        }else
+          Navigator.pushNamed(context, DailyNotesQuestionsScreen.id,arguments: subUser);
       },
     );
   }

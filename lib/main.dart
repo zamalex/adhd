@@ -31,6 +31,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Screens/Auth/bloc/auth_bloc.dart';
+import 'Screens/Routine/select_child_screen.dart';
 import 'Screens/SideMenu/Daliy notes/daily_notes_sub_users.dart';
 import 'Screens/SideMenu/Notification/new_message_screen.dart';
 import 'Screens/SideMenu/file_screens/bloc/educational_files_status.dart';
@@ -104,6 +105,7 @@ class MyApp extends StatelessWidget {
             AudioListScreen.id: (context) => AudioListScreen(),
             OnboardingScreen.id: (context) => OnboardingScreen(),
             ChatScreeen.id: (context) => ChatScreeen(),
+            SelectParentChildScreen.id: (context) => SelectParentChildScreen(),
           }),
     );
   }
