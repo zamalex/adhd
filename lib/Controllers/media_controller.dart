@@ -76,6 +76,29 @@ class MediaController {
 
   }
 
+
+  static Future<List<Video>> getBehavioralProblemsFiles() async {
+
+    try{
+      var response = await ApiConnection.get(URL.BEHAVIORAL_PROBLEMS_FILES_URL,{});
+
+      var videos = MediaResponse.fromJson(response).videos ?? [];
+      var success = MediaResponse.fromJson(response).statusCode ?? 0;
+
+      if (success == 200 || success == 201) {
+
+        return videos;
+      } else {
+
+        return [];
+      }
+    }
+    catch(e){
+      return [];
+    }
+
+  }
+
   static Future<List<NotificationItem>> getNotificationsList() async {
 
     try{

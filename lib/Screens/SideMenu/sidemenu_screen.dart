@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import '../../Controllers/Utilites/urls.dart';
 import '../../Utilities/static_functions.dart';
 import '../Auth/login_screen.dart';
+import 'BehavioralProblemsScreen/problems_screen.dart';
 
 class SideMenuScreen extends StatelessWidget {
   static const String id = "side_menu";
@@ -68,15 +69,15 @@ class SideMenuScreen extends StatelessWidget {
               }),
           sideMenuRow(
               title: "Behavioral problems solutions",
-              visable: false,
+              visable: URL.userType=='Parent',
               image: "${Constants.LOCAL_IMAGE_PATH}magic.png",
               onTap: () {
-                Navigator.pushNamed(context, FileListScreen.id);
+                Navigator.pushNamed(context, BehavioralProblemsScreen.id);
               }),
 
           sideMenuRow(
               title: "Praise your child",
-              visable: false,
+              visable: URL.userType=='Parent',
               image: "${Constants.LOCAL_IMAGE_PATH}Frame.png",
               onTap: () {
                 Navigator.pushNamed(context, NotificationsListScreen.id);

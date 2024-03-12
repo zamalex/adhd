@@ -152,7 +152,7 @@ class RoutinController {
 
     try{
       var response = await ApiConnection.get(URL.GET_DAILY_NOTES_QUESTIONS_URL,{
-        "role": "Trainer"
+        "role": URL.userType
         //,"ageGroup": "Teen"
       });
 

@@ -1,9 +1,14 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:adhd/Controllers/Utilites/urls.dart';
 import 'package:adhd/Screens/SideMenu/Notification/audio_player.dart';
+import 'package:adhd/Screens/SideMenu/Notification/bloc/notification_bloc.dart';
+import 'package:adhd/Screens/SideMenu/Notification/bloc/notification_status.dart';
 import 'package:adhd/widgets/Utilities/button_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../Utilities/constants.dart';
 import '../../../widgets/Auth/rich_textfiield_widget.dart';
@@ -23,6 +28,7 @@ class NewMessageScreen extends StatefulWidget {
 class _NewMessageScreenState extends State<NewMessageScreen> {
   int _recordDuration = 0;
   Timer? _timer;
+  String message='';
   final _audioRecorder = AudioRecorder();
   StreamSubscription<RecordState>? _recordSub;
   RecordState _recordState = RecordState.stop;
@@ -30,6 +36,8 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
   // Amplitude? _amplitude;
   var audioPath = "";
   var showPlayer = false;
+  final _form = GlobalKey<FormState>();
+
   @override
   void initState() {
     _recordSub = _audioRecorder.onStateChanged().listen((recordState) {
@@ -103,6 +111,26 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
     });
   }
 
+
+  sendNotification(){
+    if(_form.currentState!.validate()){
+      _form.currentState!.save();
+
+      Map<String,dynamic> body={
+        'TitleAr':message,
+        'TitleEn':message,
+        'VoiceNotification':audioPath.isEmpty?null:File(audioPath),
+        'TaskDuration':20,
+        'SendAt':DateTime.now().toString(),
+        'HasSound':audioPath.isNotEmpty,
+        'PatientID':URL.selectedChild!.id,
+      };
+
+      context.read<NotificationCubit>().sendNotification(body);
+
+    }
+  }
+
   //NotificationWidget
   @override
   Widget build(BuildContext context) {
@@ -115,44 +143,53 @@ class _NewMessageScreenState extends State<NewMessageScreen> {
           title: "",
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Column(
+      body: BlocConsumer<NotificationCubit,NotificationState>(
+        builder:(context, state) => state is NotificationLoading?Center(child: CircularProgressIndicator(),):Form(
+          key: _form,
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
               children: [
-                RichTextFieldWidget(
-                  returnValue: () {},
+                Column(
+                  children: [
+                    RichTextFieldWidget(
+                      returnValue: (v) {
+                        message = v;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                     Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    _buildRecordStopControl(),
+                    const SizedBox(width: 20),
+                    _buildPauseResumeControl(),
+                    const SizedBox(width: 20),
+                    _buildText(),
+                  ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
-                 Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                _buildRecordStopControl(),
-                const SizedBox(width: 20),
-                _buildPauseResumeControl(),
-                const SizedBox(width: 20),
-                _buildText(),
+                if (showPlayer)
+                  AudioPlayer(
+                    source: audioPath,
+                    onDelete: () {
+                      setState(() => showPlayer = false);
+                    },
+                  ),
+                  ],
+                ),
+
+                ButtonWidget(title: "Send", action: () {
+                  sendNotification();
+                }),
               ],
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            if (showPlayer)
-              AudioPlayer(
-                source: audioPath,
-                onDelete: () {
-                  setState(() => showPlayer = false);
-                },
-              ),
-              ],
-            ),
-           
-            ButtonWidget(title: "Send", action: () {}),
-          ],
-        ),
+          ),
+        ), listener: (BuildContext context, NotificationState state) {  },
       ),
     );
   }

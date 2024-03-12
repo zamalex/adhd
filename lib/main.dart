@@ -11,6 +11,8 @@ import 'package:adhd/Screens/Routine/routine_questions.dart';
 import 'package:adhd/Screens/SideMenu/Audio_Screens/audio_list_screen.dart';
 import 'package:adhd/Screens/SideMenu/Audio_Screens/bloc/audio_list_bloc.dart';
 import 'package:adhd/Screens/SideMenu/Audio_Screens/bloc/audio_list_status.dart';
+import 'package:adhd/Screens/SideMenu/BehavioralProblemsScreen/bloc/behavioral_problems_files_status.dart';
+import 'package:adhd/Screens/SideMenu/BehavioralProblemsScreen/problems_screen.dart';
 import 'package:adhd/Screens/SideMenu/Chat/chat_screen.dart';
 import 'package:adhd/Screens/SideMenu/Daliy%20notes/bloc/daily_notes_bloc.dart';
 import 'package:adhd/Screens/SideMenu/Daliy%20notes/bloc/daily_notes_states.dart';
@@ -32,6 +34,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'Screens/Auth/bloc/auth_bloc.dart';
 import 'Screens/Routine/select_child_screen.dart';
+import 'Screens/SideMenu/BehavioralProblemsScreen/bloc/behavioral_problems_bloc.dart';
 import 'Screens/SideMenu/Daliy notes/daily_notes_sub_users.dart';
 import 'Screens/SideMenu/Notification/new_message_screen.dart';
 import 'Screens/SideMenu/file_screens/bloc/educational_files_status.dart';
@@ -55,6 +58,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AudioCubit()..emit(AudioInitial())),
         BlocProvider(create: (context) => NotificationCubit()..emit(NotificationInitial())),
         BlocProvider(create: (context) => DailyNotesCubit()..emit(DailyNotesInit())),
+        BlocProvider(create: (context) => BehavioralProblemsCubit()..emit(BehavioralProblemsInitial())),
         BlocProvider(
             create: (context) => RoutineBloc()..add(InitialRoutinEvent())),
       ],
@@ -106,6 +110,7 @@ class MyApp extends StatelessWidget {
             OnboardingScreen.id: (context) => OnboardingScreen(),
             ChatScreeen.id: (context) => ChatScreeen(),
             SelectParentChildScreen.id: (context) => SelectParentChildScreen(),
+            BehavioralProblemsScreen.id: (context) => BehavioralProblemsScreen(),
           }),
     );
   }

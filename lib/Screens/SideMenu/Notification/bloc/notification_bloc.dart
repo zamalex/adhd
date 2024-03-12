@@ -1,4 +1,5 @@
 import 'package:adhd/Controllers/media_controller.dart';
+import 'package:adhd/Controllers/notifications_controller.dart';
 import 'package:adhd/Models/notifications_response.dart';
 import 'package:adhd/Screens/SideMenu/Notification/bloc/notification_status.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +21,26 @@ class NotificationCubit extends Cubit<NotificationState> {
 
 
       emit(NotificationLoaded(files));
+    } catch (e) {
+      emit(NotificationError('Failed to fetch notifications. Error: $e'));
+    }
+  }
+
+
+  void sendNotification(Map<String,dynamic> body) async {
+    emit(NotificationLoading());
+
+    try {
+      Map<String,dynamic> response = await NotificationController.sendNotification(body);
+
+
+      if(response['success']){
+        emit(NotificationSuccess(response['message']));
+
+      }else{
+        emit(NotificationError(response['message']));
+
+      }
     } catch (e) {
       emit(NotificationError('Failed to fetch notifications. Error: $e'));
     }

@@ -15,6 +15,7 @@ class URL {
   static String AUDIO_URL = DOMAIN_WITH_PARTITION + "Media/Audios/Mindfulness";
   static String VIDEO_URL = DOMAIN_WITH_PARTITION + "Media/Videos/Educational";
   static String FILES_URL = DOMAIN_WITH_PARTITION + "Media/Files/Educational";
+  static String BEHAVIORAL_PROBLEMS_FILES_URL = DOMAIN_WITH_PARTITION + "Media/Files/BehavioralProblems";
   static String NOTIFICATIONS_URL = DOMAIN_WITH_PARTITION + "NotificationPatient";
   static String FORGET_PASSWORD_EMAIL_URL = DOMAIN + "Account/ForgetPassword";
   static String PASSWORD_RESET_EMAIL_URL = DOMAIN + "Account/ResetPassword";
@@ -34,6 +35,9 @@ class URL {
   static String GET_SUB_URL = DOMAIN_WITH_PARTITION + "Sub";
   static String GET_DAILY_NOTES_QUESTIONS_URL = DOMAIN_WITH_PARTITION + "AllReports";
   static String SUBMIT_SUB_USER_ANSWER_URL = DOMAIN_WITH_PARTITION + "ReportAnswer";
+
+
+  static String SEND_NOTIFICATION = DOMAIN_WITH_PARTITION + "NotificationParent";
 
   static String userID='';
   static String userType = '';
