@@ -27,6 +27,23 @@ class NotificationCubit extends Cubit<NotificationState> {
   }
 
 
+  void fetchStaticNotifications() async {
+    emit(NotificationLoading());
+
+    try {
+      // Simulate fetching data from an API
+      List<NotificationItem> files = await MediaController.getStaticNotificationsList();
+
+      // Replace this with your actual API call to get educational files
+
+
+      emit(NotificationLoaded(files));
+    } catch (e) {
+      emit(NotificationError('Failed to fetch notifications. Error: $e'));
+    }
+  }
+
+
   void sendNotification(Map<String,dynamic> body) async {
     emit(NotificationLoading());
 
@@ -44,5 +61,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     } catch (e) {
       emit(NotificationError('Failed to fetch notifications. Error: $e'));
     }
+
+    fetchStaticNotifications();
   }
 }

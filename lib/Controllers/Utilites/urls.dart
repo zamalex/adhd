@@ -17,6 +17,7 @@ class URL {
   static String FILES_URL = DOMAIN_WITH_PARTITION + "Media/Files/Educational";
   static String BEHAVIORAL_PROBLEMS_FILES_URL = DOMAIN_WITH_PARTITION + "Media/Files/BehavioralProblems";
   static String NOTIFICATIONS_URL = DOMAIN_WITH_PARTITION + "NotificationPatient";
+  static String STATIC_NOTIFICATIONS_URL = DOMAIN_WITH_PARTITION + "Notification";
   static String FORGET_PASSWORD_EMAIL_URL = DOMAIN + "Account/ForgetPassword";
   static String PASSWORD_RESET_EMAIL_URL = DOMAIN + "Account/ResetPassword";
   static String DELETE_ACCOUNT_URL = DOMAIN + "Account/DeactivateUser/";
@@ -61,6 +62,13 @@ class URL {
       'Accept': 'text/plain',
 
       // "Accept": 'application/json'
+    };
+  }
+
+  static Map<String, String> MULTIPART_HEADER() {
+    return {
+      "Authorization": "Bearer ${URL.USER_TOKEN}",
+
     };
   }
   static Map<String, String> HEADERWithoutCharset() {

@@ -50,6 +50,7 @@ dependencies:
   audioplayers: any
   webview_flutter: ^4.7.0
   confetti: any
+  dio: ^5.4.1
 
 dev_dependencies:
   flutter_test:

@@ -30,7 +30,6 @@ class ApiConnection {
       return Future.error(URL.SERVER_ERROR);
     }
   }
-
   static Future<dynamic> get(String url, Map<String, dynamic>? body) async {
     try {
       print("//////////////////");

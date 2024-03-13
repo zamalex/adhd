@@ -122,4 +122,28 @@ class MediaController {
   }
 
 
+
+  static Future<List<NotificationItem>> getStaticNotificationsList() async {
+
+    try{
+      var response = await ApiConnection.get('${URL.STATIC_NOTIFICATIONS_URL}',{});
+
+      var videos = NotificationResponse.fromJson(response).notifications ?? [];
+      var success = NotificationResponse.fromJson(response).statusCode ?? 0;
+
+      if (success == 200 || success == 201) {
+
+        return videos;
+      } else {
+
+        return [];
+      }
+    }
+    catch(e){
+      return [];
+    }
+
+  }
+
+
 }
