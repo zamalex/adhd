@@ -21,6 +21,8 @@ import 'package:adhd/Screens/SideMenu/Notification/bloc/notification_bloc.dart';
 import 'package:adhd/Screens/SideMenu/Notification/bloc/notification_status.dart';
 import 'package:adhd/Screens/SideMenu/Notification/my_notifications_screen.dart';
 import 'package:adhd/Screens/SideMenu/Notification/notifications_list_screen.dart';
+import 'package:adhd/Screens/SideMenu/Reports/bloc/reports_bloc.dart';
+import 'package:adhd/Screens/SideMenu/Reports/bloc/reports_status.dart';
 import 'package:adhd/Screens/SideMenu/Reports/report_list.dart';
 import 'package:adhd/Screens/SideMenu/Video_Screens/bloc/video_list_status.dart';
 import 'package:adhd/Screens/SideMenu/Video_Screens/bloc/vidoes_list_bloc.dart';
@@ -59,6 +61,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => NotificationCubit()..emit(NotificationInitial())),
         BlocProvider(create: (context) => DailyNotesCubit()..emit(DailyNotesInit())),
         BlocProvider(create: (context) => BehavioralProblemsCubit()..emit(BehavioralProblemsInitial())),
+        BlocProvider(create: (context) => ReportsCubit()..emit(ReportsInitial())),
         BlocProvider(
             create: (context) => RoutineBloc()..add(InitialRoutinEvent())),
       ],

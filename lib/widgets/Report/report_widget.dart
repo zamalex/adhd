@@ -2,7 +2,12 @@ import 'package:adhd/Utilities/constants.dart';
 import 'package:adhd/widgets/Utilities/image_neetwork_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../Models/reports_response.dart';
+
 class ReportWidget extends StatelessWidget {
+
+  Report report;
+  ReportWidget({required this.report});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,7 +19,7 @@ class ReportWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Image.asset(
-            "${Constants.LOCAL_IMAGE_PATH}—Pngtree—pdf file icon png_7965915 1.png",
+            "${Constants.LOCAL_IMAGE_PATH}Pngtree pdf file icon png_7965915 1.png",
             height: 40,
             width: 40,
           ),

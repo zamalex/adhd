@@ -85,7 +85,7 @@ class SideMenuScreen extends StatelessWidget {
 
           sideMenuRow(
               title: "Reports",
-              visable: false,
+              visable: URL.userType=='Parent',
               image: "${Constants.LOCAL_IMAGE_PATH}tabler_logout-2.png",
               onTap: () {
                 Navigator.pushNamed(context, ReportListScreen.id);

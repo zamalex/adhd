@@ -1,6 +1,10 @@
+import 'package:adhd/Models/reports_response.dart';
+import 'package:adhd/Screens/SideMenu/Reports/bloc/reports_bloc.dart';
+import 'package:adhd/Screens/SideMenu/Reports/bloc/reports_status.dart';
 import 'package:adhd/Utilities/static_functions.dart';
 import 'package:adhd/widgets/Utilities/button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../Utilities/constants.dart';
 import '../../../widgets/Report/report_widget.dart';
@@ -11,6 +15,8 @@ class ReportListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    context.read<ReportsCubit>().fetchReports();
     // TODO: implement build
     return Scaffold(
       backgroundColor: Constants.WHITE_BACKGROUND,
@@ -20,16 +26,18 @@ class ReportListScreen extends StatelessWidget {
           title: "Reports",
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [
-            _buttonTap(),
-            SizedBox(
-              height: 10,
-            ),
-            Expanded(child: _fileList()),
-          ],
+      body: BlocBuilder<ReportsCubit,ReportsState>(
+        builder:(context, state) => Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              _buttonTap(),
+              SizedBox(
+                height: 10,
+              ),
+              state is ReportsLoading?Center(child: CircularProgressIndicator(),):state is ReportsLoaded?Expanded(child: _fileList(reports: state.reports,)):Container(),
+            ],
+          ),
         ),
       ),
     );
@@ -37,13 +45,17 @@ class ReportListScreen extends StatelessWidget {
 }
 
 class _fileList extends StatelessWidget {
+  List<Report> reports;
+
+  _fileList({required this.reports});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return ListView.separated(
-      itemBuilder: (context, index) => ReportWidget(),
+      itemBuilder: (context, index) => ReportWidget(report: reports[index],),
       scrollDirection: Axis.vertical,
-      itemCount: 10,
+      itemCount: reports.length,
       separatorBuilder: (BuildContext context, int index) => SizedBox(
         height: 40,
         child: Center(
