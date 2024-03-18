@@ -80,21 +80,24 @@ class MediaController {
 
 
 
-  static Future<List<Report>> getReportsList() async {
+  static Future<List<Report>> getReportsList(Map<String,String> query) async {
 
     try{
-      var response = await ApiConnection.get(URL.REPORTS_URL,{});
+      var response = await ApiConnection.get(URL.REPORTS_URL,query);
 
-      var reports = ReportsResponse.fromJson(response).reports ?? [];
-      var success = ReportsResponse.fromJson(response).statusCode ?? 0;
+      List<Report> reports =[];
 
-      if (success == 200 || success == 201) {
+      (response as List).forEach((element) {
+        Report r = Report.fromJson(element);
+        reports.add(r);
+        print(reports.length);
+        print(r.fileDownloadName);
+      });
+
+      print(reports.length);
 
         return reports;
-      } else {
 
-        return [];
-      }
     }
     catch(e){
       return [];

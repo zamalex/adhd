@@ -1,19 +1,40 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:adhd/Utilities/constants.dart';
 import 'package:adhd/widgets/Utilities/image_neetwork_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../Models/reports_response.dart';
 
-class ReportWidget extends StatelessWidget {
-
+class ReportWidget extends StatefulWidget {
   Report report;
   ReportWidget({required this.report});
+
+  @override
+  State<ReportWidget> createState() => _ReportWidgetState();
+}
+
+class _ReportWidgetState extends State<ReportWidget> {
+  createPdf() async {
+    var bytes = base64Decode(widget.report.fileContents.replaceAll('\n', ''));
+    final output = await getTemporaryDirectory();
+    final file = File("${output.path}/report.pdf");
+    await file.writeAsBytes(bytes.buffer.asUint8List());
+
+    print("${output.path}/report.pdf");
+    await OpenFile.open("${output.path}/report.pdf");
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return InkWell(
       onTap: () async {
-        print("fdsfs");
+        createPdf();
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -27,7 +48,7 @@ class ReportWidget extends StatelessWidget {
             width: 10,
           ),
           Text(
-            "27-8-2023",
+            widget.report.fileDownloadName,
             style: TextStyle(fontSize: 17, color: Colors.black),
           ),
         ],

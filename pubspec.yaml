@@ -51,6 +51,8 @@ dependencies:
   webview_flutter: ^4.7.0
   confetti: any
   dio: ^5.4.1
+  path_provider: ^2.1.2
+  open_file: ^3.3.2
 
 dev_dependencies:
   flutter_test:

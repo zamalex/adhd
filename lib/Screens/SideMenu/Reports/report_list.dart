@@ -1,3 +1,4 @@
+import 'package:adhd/Controllers/Utilites/urls.dart';
 import 'package:adhd/Models/reports_response.dart';
 import 'package:adhd/Screens/SideMenu/Reports/bloc/reports_bloc.dart';
 import 'package:adhd/Screens/SideMenu/Reports/bloc/reports_status.dart';
@@ -16,7 +17,10 @@ class ReportListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    context.read<ReportsCubit>().fetchReports();
+    context.read<ReportsCubit>().fetchReports({
+'Extension':'PDF',
+      'id':URL.selectedChild?.id??''
+    });
     // TODO: implement build
     return Scaffold(
       backgroundColor: Constants.WHITE_BACKGROUND,
@@ -110,7 +114,12 @@ class _button extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
             color: Constants.MAIN_COLOR),
         child: InkWell(
-            onTap: () {},
+            onTap: () {
+              context.read<ReportsCubit>().fetchReports({
+                'Extension':'PDF',
+                'id':URL.selectedChild?.id??''
+              });
+            },
             child: Center(
                 child: Text(
               title,
