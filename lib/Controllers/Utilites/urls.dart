@@ -15,7 +15,10 @@ class URL {
   static String AUDIO_URL = DOMAIN_WITH_PARTITION + "Media/Audios/Mindfulness";
   static String VIDEO_URL = DOMAIN_WITH_PARTITION + "Media/Videos/Educational";
   static String FILES_URL = DOMAIN_WITH_PARTITION + "Media/Files/Educational";
-  static String REPORTS_URL = DOMAIN_WITH_PARTITION + "ParentAllReportsForAuser";
+  static String PARENT_REPORTS_URL = DOMAIN_WITH_PARTITION + "ParentAllReportsForAuser";
+  static String TEACHER_REPORTS_URL = DOMAIN_WITH_PARTITION + "TeacherAllReportsForAuser";
+  static String TRAINER_REPORTS_URL = DOMAIN_WITH_PARTITION + "TrainerAllReportsForAuser";
+  static String PSYCHO_REPORTS_URL = DOMAIN_WITH_PARTITION + "ParentAllReportsForAuser";
   static String BEHAVIORAL_PROBLEMS_FILES_URL = DOMAIN_WITH_PARTITION + "Media/Files/BehavioralProblems";
   static String NOTIFICATIONS_URL = DOMAIN_WITH_PARTITION + "NotificationPatient";
   static String STATIC_NOTIFICATIONS_URL = DOMAIN_WITH_PARTITION + "Notification";

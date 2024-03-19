@@ -8,12 +8,12 @@ import 'reports_status.dart';
 class ReportsCubit extends Cubit<ReportsState> {
   ReportsCubit() : super(ReportsInitial());
 
-  void fetchReports(Map<String,String> q) async {
+  void fetchReports(Map<String,String> q,String t) async {
     emit(ReportsLoading());
 
     try {
       // Simulate fetching data from an API
-      List<Report> files = await MediaController.getReportsList(q);
+      List<Report> files = await MediaController.getReportsList(q,t);
 
       // Replace this with your actual API call to get educational files
 

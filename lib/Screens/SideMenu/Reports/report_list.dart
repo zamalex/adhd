@@ -20,7 +20,7 @@ class ReportListScreen extends StatelessWidget {
     context.read<ReportsCubit>().fetchReports({
 'Extension':'PDF',
       'id':URL.selectedChild?.id??''
-    });
+    },'Parent');
     // TODO: implement build
     return Scaffold(
       backgroundColor: Constants.WHITE_BACKGROUND,
@@ -86,6 +86,10 @@ class _buttonTap extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          _button(title: "Parent"),
+          const SizedBox(
+            width: 10,
+          ),
           _button(title: "Psychologist"),
           const SizedBox(
             width: 10,
@@ -118,7 +122,7 @@ class _button extends StatelessWidget {
               context.read<ReportsCubit>().fetchReports({
                 'Extension':'PDF',
                 'id':URL.selectedChild?.id??''
-              });
+              },title);
             },
             child: Center(
                 child: Text(

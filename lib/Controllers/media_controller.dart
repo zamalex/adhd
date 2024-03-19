@@ -80,10 +80,11 @@ class MediaController {
 
 
 
-  static Future<List<Report>> getReportsList(Map<String,String> query) async {
+  static Future<List<Report>> getReportsList(Map<String,String> query,String type) async {
 
     try{
-      var response = await ApiConnection.get(URL.REPORTS_URL,query);
+      String url = type=='Teacher'?URL.TEACHER_REPORTS_URL:type=='Trainer'?URL.TRAINER_REPORTS_URL:URL.PARENT_REPORTS_URL;
+      var response = await ApiConnection.get(url,query);
 
       List<Report> reports =[];
 
