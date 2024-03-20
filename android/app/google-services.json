@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "805743988019",
+    "project_id": "adhd-app-mobile",
+    "storage_bucket": "adhd-app-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805743988019:android:369c0d2d128e2364598246",
+        "android_client_info": {
+          "package_name": "com.example.adhd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbLx5-pP8cK9n6QMPPVizmp5o__tv7-W0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

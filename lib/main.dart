@@ -31,6 +31,7 @@ import 'package:adhd/Screens/SideMenu/file_screens/file_list_screen.dart';
 import 'package:adhd/Screens/SideMenu/sidemenu_screen.dart';
 import 'package:adhd/Screens/SideMenu/Video_Screens/video_list_screen.dart';
 import 'package:adhd/Utilities/constants.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,8 +42,62 @@ import 'Screens/SideMenu/Daliy notes/daily_notes_sub_users.dart';
 import 'Screens/SideMenu/Notification/new_message_screen.dart';
 import 'Screens/SideMenu/file_screens/bloc/educational_files_status.dart';
 import 'Screens/SideMenu/followup_forms/followup_forms_screen.dart';
+import 'firebase_options.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
-void main() {
+void _configureFCMListeners() {
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    // Handle incoming data message when the app is in the foreground
+
+    print("foreground Data message received: ${message.data}");
+    // Extract data and perform custom actions
+  });
+
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    // Handle incoming data message when the app is in the background or terminated
+    print("background Data message opened: ${message.data}");
+
+    // Extract data and perform custom actions
+  });
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+
+}
+
+void _initializeFCM() {
+  FirebaseMessaging.instance.requestPermission();
+  FirebaseMessaging.instance.getToken().then((token) {
+    print("FCM Token: $token");
+
+    print('------------------');
+
+
+
+    // Store the token on your server for sending targeted messages
+  });
+}
+
+bool hasNotification = false;
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print("Handling a background message: ${message.data.toString()}");
+
+  /*init();
+
+  sl<PreferenceUtils>().saveNotification();*/
+}
+void main()async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  _initializeFCM();
+  _configureFCMListeners();
   runApp(const MyApp());
 }
 
