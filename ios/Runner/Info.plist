@@ -49,6 +49,11 @@
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
 <string>We need to access to the microphone to record audio file</string>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>https</string>
+  <string>http</string>
+</array>
 <key>NSAppTransportSecurity</key>
 <dict>
     <key>NSAllowsArbitraryLoads</key><true/>

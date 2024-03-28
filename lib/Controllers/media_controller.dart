@@ -83,7 +83,7 @@ class MediaController {
   static Future<List<Report>> getReportsList(Map<String,String> query,String type) async {
 
     try{
-      String url = type=='Teacher'?URL.TEACHER_REPORTS_URL:type=='Trainer'?URL.TRAINER_REPORTS_URL:URL.PARENT_REPORTS_URL;
+      String url = /*type=='Teacher'?URL.TEACHER_REPORTS_URL:type=='Trainer'?URL.TRAINER_REPORTS_URL:type=='Parent'?URL.PARENT_REPORTS_URL:*/URL.PSYCHO_REPORTS_URL;
       var response = await ApiConnection.get(url,query);
 
       List<Report> reports =[];
@@ -92,12 +92,13 @@ class MediaController {
         Report r = Report.fromJson(element);
         reports.add(r);
         print(reports.length);
-        print(r.fileDownloadName);
       });
 
       print(reports.length);
 
-        return reports;
+
+
+      return reports.where((element) => element.reportType==type).toList();
 
     }
     catch(e){
